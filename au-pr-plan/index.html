@@ -1,0 +1,832 @@
+<title>233112 赴澳规划</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Serif+SC:wght@600;700&display=swap">
+<style>
+:root{
+  --bg:#F1F4F6;
+  --surface:#FFFFFF;
+  --surface-2:#E8EDF1;
+  --ink:#16202A;
+  --ink-2:#3A4754;
+  --muted:#5E6B77;
+  --line:#D5DCE2;
+  --accent:#A9542A;
+  --accent-soft:#F4E4DA;
+  --steel:#2C5B7A;
+  --steel-soft:#DDE8F0;
+  --good:#23724A;
+  --good-soft:#DCEFE3;
+  --warn:#94620F;
+  --warn-soft:#F6EAD2;
+  --crit:#B3261E;
+  --crit-soft:#F7DEDB;
+  --band:rgba(179,38,30,.07);
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --body:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0E1317;--surface:#161E25;--surface-2:#1D2730;--ink:#E6ECF0;--ink-2:#C3CDD5;--muted:#8F9DA9;--line:#2A3640;
+    --accent:#E38E5C;--accent-soft:#3A2419;--steel:#85B6D6;--steel-soft:#1A2C39;
+    --good:#62C58F;--good-soft:#16301F;--warn:#E4B456;--warn-soft:#352812;--crit:#F07F72;--crit-soft:#3A1916;--band:rgba(240,127,114,.08);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0E1317;--surface:#161E25;--surface-2:#1D2730;--ink:#E6ECF0;--ink-2:#C3CDD5;--muted:#8F9DA9;--line:#2A3640;
+  --accent:#E38E5C;--accent-soft:#3A2419;--steel:#85B6D6;--steel-soft:#1A2C39;
+  --good:#62C58F;--good-soft:#16301F;--warn:#E4B456;--warn-soft:#352812;--crit:#F07F72;--crit-soft:#3A1916;--band:rgba(240,127,114,.08);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;margin:0}
+.wrap{max-width:1100px;margin:0 auto;padding-inline:20px;padding-block:28px 64px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.3}
+h1{font-size:clamp(26px,4.2vw,38px);font-weight:700}
+h2{font-size:24px;font-weight:700}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+a{color:var(--steel)}
+.num,.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+
+/* header */
+header.top{display:grid;grid-template-columns:minmax(0,1fr);gap:18px;padding-block:8px 24px;border-bottom:1px solid var(--line)}
+.code-tag{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;color:var(--accent);border:1px solid var(--accent);border-radius:3px;padding:2px 8px;width:max-content;max-width:100%;flex-wrap:wrap}
+.profile{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.profile div{background:var(--surface);padding:10px 14px;display:grid;gap:2px}
+.profile b{font-weight:600}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding:8px 20px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+nav.toc a{flex:none;text-decoration:none;color:var(--ink-2);font-size:13px;padding:4px 10px;border-radius:999px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--surface-2);outline:none}
+
+section{padding-block:40px 8px;display:grid;gap:18px;scroll-margin-top:52px}
+.sec-head{display:grid;gap:6px;max-width:70ch}
+
+/* verdict */
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.vcard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px;display:grid;gap:8px;align-content:start}
+.vcard .k{font-family:var(--mono);font-size:28px;font-weight:600;line-height:1.1}
+.vcard.alert{border-color:var(--accent);background:var(--accent-soft)}
+.vcard.alert .k{color:var(--accent)}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:20px;align-items:start}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:16px}
+.presets{display:flex;flex-wrap:wrap;gap:8px}
+.presets button{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;padding:5px 10px;cursor:pointer}
+.presets button:hover{border-color:var(--steel)}
+.presets button[aria-pressed="true"]{background:var(--steel);border-color:var(--steel);color:var(--surface)}
+.presets button:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+fieldset{border:0;margin:0;padding:0;display:grid;gap:10px}
+legend{font-size:12px;letter-spacing:.1em;color:var(--muted);font-weight:600;margin-bottom:6px;padding:0}
+.row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:10px;align-items:center}
+@media (max-width:420px){.row{grid-template-columns:1fr;gap:4px}}
+.row label{font-size:14px;color:var(--ink-2)}
+input[type=date],input[type=number],select{font:inherit;font-size:14px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:6px 8px;width:100%;min-width:0}
+input[type=number]{font-family:var(--mono)}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:6px 14px}
+.check{display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--ink-2);cursor:pointer}
+.check input{margin-top:5px;accent-color:var(--accent)}
+.check .pts{font-family:var(--mono);color:var(--muted);font-size:12px;margin-left:auto;padding-left:6px}
+.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.inline > *{flex:1 1 120px}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+.scores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.scores{grid-template-columns:1fr}}
+.score{border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:6px;background:var(--surface)}
+.score .v{font-family:var(--mono);font-size:34px;font-weight:600;line-height:1}
+.score .t{display:flex;gap:6px;align-items:center;font-size:13px;color:var(--muted)}
+.score .t input{width:64px;padding:2px 6px}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;border-radius:999px;padding:2px 9px;width:max-content}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.good{color:var(--good);background:var(--good-soft)}
+.pill.warn{color:var(--warn);background:var(--warn-soft)}
+.pill.crit{color:var(--crit);background:var(--crit-soft)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)}
+.meta b{color:var(--ink);font-family:var(--mono);font-weight:600}
+
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.06em;color:var(--muted);font-weight:600}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.zero td{color:var(--muted)}
+tfoot td{font-weight:700;border-bottom:0}
+.tbl{overflow-x:auto}
+
+.warns{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.warns li{font-size:13.5px;padding:8px 10px;border-radius:4px;background:var(--warn-soft);color:var(--ink)}
+.warns li.crit{background:var(--crit-soft)}
+.warns li b{color:var(--warn)}
+.warns li.crit b{color:var(--crit)}
+
+.chart-box{position:relative}
+.chart-box svg{display:block;width:100%;height:260px;touch-action:pan-y}
+.tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px 10px;font-size:12.5px;line-height:1.5;box-shadow:0 4px 14px rgba(0,0,0,.12);min-width:150px}
+.tip b{font-family:var(--mono)}
+.axis text{fill:var(--muted);font-size:11px;font-family:var(--mono)}
+details{border-top:1px solid var(--line);padding-top:10px}
+summary{cursor:pointer;font-size:14px;font-weight:600;color:var(--ink-2)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:12px}
+.rules .grp{display:grid;gap:6px;align-content:start}
+.rules .grp h4{margin:0;font-size:13px;color:var(--muted);font-weight:600}
+.rline{display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:6px;align-items:center;font-size:13px}
+.rline.three{grid-template-columns:52px 52px minmax(0,1fr) 60px}
+.rline input{padding:3px 6px;font-size:13px}
+.btn{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;padding:5px 12px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.timeline li{display:grid;grid-template-columns:118px 18px minmax(0,1fr);gap:12px}
+@media (max-width:560px){.timeline li{grid-template-columns:78px 14px minmax(0,1fr);gap:8px}}
+.timeline .when{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:2px;text-align:right}
+.timeline .rail{position:relative}
+.timeline .rail::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:2px;transform:translateX(-50%);background:var(--line)}
+.timeline .rail::after{content:"";position:absolute;left:50%;top:7px;width:10px;height:10px;border-radius:50%;transform:translateX(-50%);background:var(--surface);border:2px solid var(--steel)}
+.timeline li.key .rail::after{border-color:var(--accent);background:var(--accent)}
+.timeline li.danger .rail::after{border-color:var(--crit);background:var(--crit)}
+.timeline .body{padding-bottom:22px;display:grid;gap:4px}
+.timeline .body ul{margin:0;padding-left:18px;color:var(--ink-2)}
+.tag{font-size:11.5px;font-weight:600;border-radius:3px;padding:0 6px;margin-left:6px;vertical-align:2px}
+.tag.pol{color:var(--accent);background:var(--accent-soft)}
+.tag.pts{color:var(--steel);background:var(--steel-soft)}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;align-content:start}
+.card ul,.card ol{margin:0;padding-left:20px;display:grid;gap:4px;color:var(--ink-2)}
+.prose{max-width:72ch;display:grid;gap:10px;color:var(--ink-2)}
+
+.todo{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:6px 20px}
+.todo label{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--line);cursor:pointer}
+.todo input{margin-top:6px;accent-color:var(--good)}
+.todo input:checked + span{color:var(--muted);text-decoration:line-through}
+.todo .d{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:auto;padding-left:8px;white-space:nowrap}
+
+footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:10px;font-size:13px;color:var(--muted)}
+footer ul{margin:0;padding-left:18px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <span class="code-tag">ANZSCO 233112 · Materials Engineer · Engineers Australia</span>
+  <h1>材料工程师赴澳技术移民规划</h1>
+  <p class="muted" style="max-width:70ch">按你给的背景整理：路线判断、可调的 EOI 计算器、2026–2033 时间线和行动清单。信息截至 2026 年 9 月，政策在变，每年 7 月前后要重新核对一次。</p>
+  <div class="profile">
+    <div><span class="eyebrow">出生</span><b class="num">2000-07-30</b><span class="small muted">2033-07-30 满 33 岁</span></div>
+    <div><span class="eyebrow">在读</span><b>安徽理工 · 材料工程专硕</b><span class="small muted">半导体材料 / 检测，合肥科学中心联培</span></div>
+    <div><span class="eyebrow">毕业</span><b class="num">2028-06</b><span class="small muted">工作经验从毕业后才算</span></div>
+    <div><span class="eyebrow">既有学历</span><b>大专软件技术 + 本科软件工程</b><span class="small muted">学信网可查</span></div>
+    <div><span class="eyebrow">目标</span><b>189 / 190 / 491</b><span class="small muted">求职：常州、合肥外企材料岗</span></div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="目录">
+  <a href="#verdict">结论</a><a href="#calc">EOI 计算器</a><a href="#timeline">时间线</a><a href="#visas">签证对比</a><a href="#ea">职业评估</a><a href="#work">工作经验</a><a href="#english">英语</a><a href="#risks">风险与备选</a><a href="#todo">清单</a>
+</nav>
+
+<section id="verdict">
+  <div class="sec-head">
+    <span class="eyebrow">先看结论</span>
+    <h2>路线可行，但 189 要靠加分项和时间窗口</h2>
+  </div>
+  <div class="verdict">
+    <div class="vcard alert">
+      <span class="eyebrow">政策变量</span>
+      <span class="k">2027-07-01</span>
+      <p>2026–27 联邦预算已确认要改积分表，新表计划 2027 年 7 月 1 日起用，草案立法预计 2026 年 12 月。你 2028 年毕业后递 EOI，<b>大概率按新表算分</b>。下面的计算器用的是现行规则，积分值都能改，新表公布后直接改数就行。</p>
+    </div>
+    <div class="vcard">
+      <span class="eyebrow">按现行规则估算</span>
+      <span class="k">75 → 85</span>
+      <p>毕业时（28 岁、英语 Superior、硕士、单身）约 <b>75 分</b>；工作满 3 年 +5，再考 NAATI CCL +5，到 <b>85 分</b>。材料工程师 189 近年邀请线大约在 85–95 之间浮动，所以 85 只是刚够得着，190 / 491 更现实。</p>
+    </div>
+    <div class="vcard">
+      <span class="eyebrow">时间窗口</span>
+      <span class="k">≤ 2033-07-29</span>
+      <p>现行规则下 25–32 岁拿满 30 分，满 33 岁降到 25 分。你工作满 5 年（+5）和满 33 岁（−5）几乎同时发生，所以<b>最好在 2031–2033 年之间拿到邀请</b>。英语 Superior 和 NAATI 是你能自己控制的 25 分。</p>
+    </div>
+  </div>
+</section>
+
+<section id="calc">
+  <div class="sec-head">
+    <span class="eyebrow">EOI 计算器</span>
+    <h2>选一个时间点，看当时能有多少分</h2>
+    <p class="muted">年龄和海外工作年限按“评估日期”自动算。设置会保存在你这台设备的浏览器里。点击下方曲线图也能改评估日期。</p>
+  </div>
+
+  <div class="calc">
+    <form class="panel" id="form" autocomplete="off">
+      <div>
+        <legend style="margin-bottom:8px">快速方案</legend>
+        <div class="presets" id="presets" role="group" aria-label="快速方案"></div>
+      </div>
+
+      <fieldset>
+        <legend>时间</legend>
+        <div class="row"><label for="date">评估日期</label><input type="date" id="date"></div>
+        <div class="row"><label for="dob">出生日期</label><input type="date" id="dob"></div>
+        <div class="row"><label for="grad">硕士毕业</label><input type="date" id="grad"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>英语</legend>
+        <div class="row"><label for="english">等级</label>
+          <select id="english">
+            <option value="superior">Superior · IELTS 各 8 / PTE L69 R70 W85 S88</option>
+            <option value="proficient">Proficient · IELTS 各 7 / PTE L58 R59 W69 S76</option>
+            <option value="competent">Competent · IELTS 各 6 / PTE L47 R48 W51 S54</option>
+          </select>
+        </div>
+        <div class="row"><label for="engDate">考试日期</label><input type="date" id="engDate"></div>
+        <label class="check"><input type="checkbox" id="engRenew"><span>成绩到期前会重考同等分数（积分用成绩 3 年有效）</span></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>学历与经验</legend>
+        <div class="row"><label for="edu">学历认定</label>
+          <select id="edu">
+            <option value="master">硕士 / 学士（EA 认定）</option>
+            <option value="phd">博士</option>
+            <option value="diploma">大专 / 文凭</option>
+            <option value="none">未认定</option>
+          </select>
+        </div>
+        <div class="row"><label for="expStart">海外工作开始</label><input type="date" id="expStart"></div>
+        <div class="row"><label for="expGap">中断 / 不算的月数</label><input type="number" id="expGap" min="0" max="120" step="1"></div>
+        <div class="row"><label for="auExp">澳洲工作年数</label><input type="number" id="auExp" min="0" max="10" step="0.5"></div>
+        <p class="hint">EA 只认毕业后、与 233112 职责相符、每周 20 小时以上的带薪工作。中间换工作的空档填到“中断月数”。</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>婚姻</legend>
+        <div class="row"><label for="partner">伴侣情况</label>
+          <select id="partner">
+            <option value="single">单身，或伴侣是澳洲公民 / PR</option>
+            <option value="skilled">伴侣有职业评估 + Competent 英语，未满 45 岁</option>
+            <option value="english">伴侣只有 Competent 英语</option>
+            <option value="none">伴侣不满足以上条件</option>
+          </select>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>加分项</legend>
+        <div class="checks">
+          <label class="check"><input type="checkbox" id="naati"><span>NAATI CCL 普通话</span><span class="pts" data-rule="naati"></span></label>
+          <label class="check"><input type="checkbox" id="ausStudy"><span>澳洲学习满 2 年</span><span class="pts" data-rule="ausStudy"></span></label>
+          <label class="check"><input type="checkbox" id="regional"><span>偏远地区学习</span><span class="pts" data-rule="regional"></span></label>
+          <label class="check"><input type="checkbox" id="specialist"><span>澳洲 STEM 研究型硕士 / 博士</span><span class="pts" data-rule="specialist"></span></label>
+          <label class="check"><input type="checkbox" id="py"><span>Professional Year</span><span class="pts" data-rule="py"></span></label>
+        </div>
+        <div class="row" id="naatiRow"><label for="naatiDate">NAATI 通过日期</label><input type="date" id="naatiDate"></div>
+        <div class="row"><label for="adjust">其他调整 ±</label><input type="number" id="adjust" min="-50" max="50" step="5"></div>
+        <p class="hint">“其他调整”用来模拟新规里还没定的项，比如收入加分，填正数或负数。</p>
+      </fieldset>
+    </form>
+
+    <div class="panel" aria-live="polite">
+      <div class="scores">
+        <div class="score"><span class="eyebrow">189 独立</span><span class="v" id="s189">–</span>
+          <span class="t"><label for="t189">目标线</label><input type="number" id="t189" step="5" min="65" max="130"></span><span id="p189"></span></div>
+        <div class="score"><span class="eyebrow">190 州担保 +<span data-rule="nom190"></span></span><span class="v" id="s190">–</span>
+          <span class="t"><label for="t190">目标线</label><input type="number" id="t190" step="5" min="65" max="130"></span><span id="p190"></span></div>
+        <div class="score"><span class="eyebrow">491 偏远 +<span data-rule="nom491"></span></span><span class="v" id="s491">–</span>
+          <span class="t"><label for="t491">目标线</label><input type="number" id="t491" step="5" min="65" max="130"></span><span id="p491"></span></div>
+      </div>
+      <div class="meta" id="meta"></div>
+      <ul class="warns" id="warns"></ul>
+
+      <div>
+        <h3 style="margin-bottom:4px">189 分数随时间变化</h3>
+        <p class="hint">实线是当前设置下的 189 分数；虚线是 189 目标线；浅红区域是满 33 岁之后。</p>
+        <div class="chart-box" id="chartBox">
+          <svg id="chart" role="img" aria-label="189 分数随时间变化的阶梯图"></svg>
+          <div class="tip" id="tip" hidden></div>
+        </div>
+      </div>
+
+      <div class="tbl">
+        <table>
+          <thead><tr><th>项目</th><th>依据</th><th class="n">分数</th></tr></thead>
+          <tbody id="breakdown"></tbody>
+          <tfoot><tr><td colspan="2">189 合计</td><td class="n" id="total">–</td></tr></tfoot>
+        </table>
+      </div>
+
+      <details id="yearly">
+        <summary>逐年表格（每年 8 月 1 日）</summary>
+        <div class="tbl" style="margin-top:10px"><table><thead><tr><th>日期</th><th class="n">年龄</th><th class="n">海外经验</th><th class="n">189</th><th class="n">190</th><th class="n">491</th></tr></thead><tbody id="yearBody"></tbody></table></div>
+      </details>
+
+      <details id="rulesBox">
+        <summary>积分规则（可编辑，新积分表出来后改这里）</summary>
+        <p class="hint" style="margin-top:8px">默认值是 2026 年 9 月仍在用的现行积分表。改动会立刻反映到上面的分数和图表，并保存在本机。</p>
+        <div class="rules" id="rules"></div>
+        <div style="margin-top:12px"><button type="button" class="btn" id="resetRules">恢复现行规则</button></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="sec-head">
+    <span class="eyebrow">时间线</span>
+    <h2>2026 → 2033，每个阶段做什么</h2>
+  </div>
+  <ol class="timeline">
+    <li><span class="when">2026-09 → 2027-06</span><span class="rail"></span><div class="body">
+      <h3>研二：课题和英语打底</h3>
+      <ul>
+        <li>把硕士课题往“材料工程”应用上靠：材料表征、缺陷 / 失效分析、工艺参数优化、检测方法开发。这些以后就是 CDR 的素材。</li>
+        <li>从现在起留存证据：开题报告、实验记录、中期报告、组会 PPT、发表或专利、联培中心的项目材料。</li>
+        <li>雅思 7.5 主要用于外企求职。移民积分看的是<b>单项最低分</b>，7.5 总分不等于 10 分。</li>
+        <li>去学信网申请大专、本科、硕士（毕业后）的学历 / 学位认证报告，确认各阶段记录一致。</li>
+      </ul></div></li>
+    <li class="key"><span class="when">2027-06 → 09</span><span class="rail"></span><div class="body">
+      <h3>外企秋招<span class="tag pol">选岗决定能否算分</span></h3>
+      <ul>
+        <li>优先岗位名称和职责都是“材料工程师 / 工艺工程师 / 失效分析工程师”的；纯销售、FAE、技术员、实验室助理级别的岗位，EA 可能不认。</li>
+        <li>具体判断标准见下面“工作经验”一节。</li>
+      </ul></div></li>
+    <li class="key"><span class="when">2027-07-01</span><span class="rail"></span><div class="body">
+      <h3>新积分表计划生效<span class="tag pol">政策</span></h3>
+      <ul>
+        <li>2026 年 12 月前后看草案：年龄段怎么切、Superior 英语多少分、海外经验还算不算、有没有收入加分、最低门槛是否从 65 提到 70。</li>
+        <li>出来后把计算器“积分规则”改成新值，重新算一遍所有方案。</li>
+      </ul></div></li>
+    <li><span class="when">2027-10 → 2028-05</span><span class="rail"></span><div class="body">
+      <h3>冲 PTE Superior<span class="tag pts">+20</span></h3>
+      <ul>
+        <li>新标准（2025-08-07 起）：听 69、读 70、写 85、说 88。写作和口语是难点，给自己留 2–3 次考试的预算。</li>
+        <li>成绩给积分用 3 年有效。2028 年初考出的成绩，2031 年初就到期，届时要重考。</li>
+      </ul></div></li>
+    <li class="key"><span class="when">2028-06 → 10</span><span class="rail"></span><div class="body">
+      <h3>毕业、入职、递 CDR</h3>
+      <ul>
+        <li>拿到学位证后向 Engineers Australia 递 CDR，常规 10–16 周，可付费加急。</li>
+        <li>NAATI CCL 普通话可以在国内线上考，成绩 5 年有效。2028 年考，能覆盖到 2033 年的窗口。<span class="tag pts">+5</span></li>
+      </ul></div></li>
+    <li><span class="when">2028 Q4</span><span class="rail"></span><div class="body">
+      <h3>递 EOI 试水</h3>
+      <ul>
+        <li>EOI 同时勾选 189 和 190（可以选“任意州”），491 单独一份 EOI 更好管理。</li>
+        <li>EOI 有效 2 年，年龄和“至今”的工作经验 SkillSelect 会自动更新分数，到期前重新递。</li>
+      </ul></div></li>
+    <li><span class="when">2029 Q3</span><span class="rail"></span><div class="body">
+      <h3>工作满 1 年：看州担保</h3>
+      <ul>
+        <li>部分州对海外申请人要求一定年限的本职工作经验。每年 7 月各州发布新名单，重点看 NSW、SA 这类历年对海外申请人相对开放的州。</li>
+      </ul></div></li>
+    <li class="key"><span class="when">2031 Q3</span><span class="rail"></span><div class="body">
+      <h3>工作满 3 年<span class="tag pts">+5</span></h3>
+      <ul>
+        <li>建议此时做 EA 的 Relevant Skilled Employment Assessment，让工作年限有书面认定。</li>
+        <li>英语到期的话在这之前重考。现行规则下这时约 85 分（含 NAATI），可冲 189。</li>
+      </ul></div></li>
+    <li class="danger"><span class="when">2033-07</span><span class="rail"></span><div class="body">
+      <h3>满 5 年 +5，但满 33 岁 −5<span class="tag pol">窗口收口</span></h3>
+      <ul>
+        <li>如果 2028-07 入职，满 5 年约在 2033-07 中旬，7 月 30 日满 33 岁，现行规则下只有两周的 90 分窗口。不要把希望押在这里。</li>
+      </ul></div></li>
+  </ol>
+</section>
+
+<section id="visas">
+  <div class="sec-head">
+    <span class="eyebrow">签证对比</span>
+    <h2>189、190、491 的区别</h2>
+  </div>
+  <div class="tbl card" style="padding:6px 8px">
+    <table>
+      <thead><tr><th>签证</th><th>身份</th><th>加分</th><th>要求</th><th>对你来说</th></tr></thead>
+      <tbody>
+        <tr><td><b>189</b> 独立技术</td><td>直接永居</td><td class="num">0</td><td>无需担保，全国任选；拼分数</td><td>最理想，但材料工程师名额少，邀请线常在 85–95</td></tr>
+        <tr><td><b>190</b> 州担保</td><td>直接永居</td><td class="num">+5</td><td>职业在州名单上；获批后承诺在该州住 2 年</td><td>最现实的永居路线，但各州对海外申请人每年政策不同</td></tr>
+        <tr><td><b>491</b> 偏远地区</td><td>5 年临居，满 3 年且达到收入要求可转 191 永居</td><td class="num">+15</td><td>在偏远地区（悉尼、墨尔本、布里斯班以外）生活工作</td><td>分数压力最小；要接受去阿德莱德、珀斯、霍巴特或更偏的地方</td></tr>
+        <tr><td><b>482 → 186</b> 雇主担保</td><td>先临居再永居</td><td class="num">–</td><td>澳洲雇主担保，不走积分</td><td>备选：外企若有澳洲业务，可争取内部调动</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="ea">
+  <div class="sec-head">
+    <span class="eyebrow">职业评估</span>
+    <h2>Engineers Australia：用硕士学历走 CDR</h2>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>为什么是 CDR</h3>
+      <p class="muted">中国 2016 年加入华盛顿协议，但协议只覆盖通过工程教育认证的本科专业。你的材料工程硕士不在范围内，要用 CDR（Competency Demonstration Report）证明能力，申请 Professional Engineer 类别下的 233112。</p>
+      <ul>
+        <li>3 篇 Career Episode，每篇 1,000–2,500 词</li>
+        <li>1 份 Summary Statement，逐条对应 EA 能力要求</li>
+        <li>CPD 清单（培训、讲座、自学）</li>
+        <li>英语成绩（EA 也要求）、学位学历证明、成绩单</li>
+        <li>费用约 AUD 1,034（2026-07 起），加急另收费</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Career Episode 素材从哪来</h3>
+      <ol>
+        <li>硕士课题：半导体材料的表征或检测方法，写清楚你负责的实验设计、数据分析和工程判断。</li>
+        <li>合肥国家科学中心联合培养里的具体项目或设备工作。</li>
+        <li>实习或入职第一年的工程项目（在毕业前写完 CDR 的话用课程设计 / 大作业）。</li>
+      </ol>
+      <p class="hint">EA 查重很严，必须自己写。可以找人改语言，不要买代写。</p>
+    </div>
+    <div class="card">
+      <h3>学历背景要注意的地方</h3>
+      <ul>
+        <li>CDR 以硕士学位为基础，大专和软件工程本科不是评估重点，但所有材料要和学信网记录一致。</li>
+        <li>学历积分按 EA 的认定给：认定为相当于澳洲学士 / 硕士都是 15 分。</li>
+        <li>学位证上的类别可能写作“材料与化工”工程硕士，CDR 里要把课程和课题讲清楚是材料工程。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>备选职业代码</h3>
+      <p class="muted">同样由 EA 评估，邀请线和州名单可能不同，每年对比一次：</p>
+      <ul>
+        <li><span class="mono">233999</span> Engineering Professionals nec</li>
+        <li><span class="mono">233914</span> Engineering Technologist</li>
+      </ul>
+      <p class="hint">另外注意：澳洲正在从 ANZSCO 切换到 OSCA 职业分类，移民系统切换时代码会变，届时核对对应关系。软件工程本科理论上能走 ACS，但 ICT 职业邀请线更高，不建议。</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="sec-head">
+    <span class="eyebrow">工作经验</span>
+    <h2>什么样的工作能算分</h2>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>选岗标准</h3>
+      <ul>
+        <li>职责与 233112 描述吻合：研究材料性能、选材、制定工艺和质量规范、测试与失效分析、改进材料工艺。</li>
+        <li>工程师职级，不是技术员或助理。</li>
+        <li>毕业后开始，每周 20 小时以上，有工资。读研期间的实习、科研助理不算。</li>
+        <li>常州梅特勒这类早 8 晚 6 双休的岗位可以接受，但要确认职位描述里有实质的材料工程内容，不只是仪器销售或应用支持。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>从入职第一天开始留的材料</h3>
+      <ul>
+        <li>劳动合同、每次调岗 / 升职的书面文件</li>
+        <li>工资单和银行流水</li>
+        <li>个税 App 纳税记录、社保缴费记录</li>
+        <li>推荐信：公司抬头，写明职位、起止日期、每周工时、薪资、具体职责，主管签字并留联系方式</li>
+        <li>项目文档、内部报告（脱敏后保存）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="english">
+  <div class="sec-head">
+    <span class="eyebrow">英语</span>
+    <h2>Superior 是你能控制的最大一项</h2>
+  </div>
+  <div class="tbl card" style="padding:6px 8px">
+    <table>
+      <thead><tr><th>等级</th><th class="n">积分</th><th>IELTS（四项都要）</th><th>PTE（2025-08-07 起考的）</th><th>PTE（之前考的）</th></tr></thead>
+      <tbody>
+        <tr><td>Competent</td><td class="n">0</td><td class="num">6.0</td><td class="num">L47 R48 W51 S54</td><td class="num">各 50</td></tr>
+        <tr><td>Proficient</td><td class="n">10</td><td class="num">7.0</td><td class="num">L58 R59 W69 S76</td><td class="num">各 65</td></tr>
+        <tr><td>Superior</td><td class="n">20</td><td class="num">8.0</td><td class="num">L69 R70 W85 S88</td><td class="num">各 79</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>雅思 8 个 8 对大多数中国考生比 PTE 难，所以你“雅思求职、PTE 冲 Superior”的安排是对的。积分用的成绩要在获邀前 3 年内，考的时间点要跟着 EOI 计划走：想在 2031 年拿邀请，2028 年初的成绩就不够用了。</p>
+    <p>新积分表的公开讨论里，Superior 英语预计会占更大权重。不管新规怎么改，这一项都值得优先投入。</p>
+  </div>
+</section>
+
+<section id="risks">
+  <div class="sec-head">
+    <span class="eyebrow">风险与备选</span>
+    <h2>哪些事会让计划落空，怎么准备</h2>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>主要风险</h3>
+      <ul>
+        <li><b>新积分表。</b>海外工作经验可能降权，收入加分可能主要惠及澳洲高薪岗位，Professional Year 和澳洲学习加分可能取消。对你有利的一面：新表预计更偏向年轻和英语好的人。</li>
+        <li><b>邀请线波动。</b>189 已改为按季度发邀，材料工程师每轮名额少，一两个高分申请人就能拉高分数线。</li>
+        <li><b>州担保不稳定。</b>海外申请人能不能申、要几年经验，每年 7 月都可能变。</li>
+        <li><b>英语到期。</b>积分算到邀请那天，英语过期当天就少 20 分。</li>
+        <li><b>婚姻变化。</b>单身有 10 分；如果结婚而伴侣没有职业评估和英语，会降到 0 或 5 分。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>备选路线</h3>
+      <ul>
+        <li><b>赴澳读博（半导体 / 材料）。</b>博士 20 分 + STEM 专业学历 10 分 + 澳洲学习 5 分，有奖学金可覆盖费用，毕业有 485 工签。新规可能调整这些加分，决定前先看终稿。</li>
+        <li><b>491 偏远地区。</b>分数压力小 15 分，适合 1–3 年工作经验时就去。</li>
+        <li><b>雇主担保。</b>外企的澳洲分支、或者在澳洲找到岗位走 482 转 186。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="todo">
+  <div class="sec-head">
+    <span class="eyebrow">行动清单</span>
+    <h2>勾掉一项少一项</h2>
+    <p class="muted">勾选状态只存在这台设备的浏览器里。</p>
+  </div>
+  <ul class="todo" id="todoList"></ul>
+</section>
+
+<footer>
+  <p><b>说明：</b>这是基于公开信息整理的规划参考，不是注册移民代理（OMARA）的法律意见。递交前请以 Home Affairs、Engineers Australia、NAATI 和各州官网为准，关键节点建议付费咨询一次注册代理。</p>
+  <p>信息来源（2026 年 9 月检索）：</p>
+  <ul>
+    <li><a href="https://immi.homeaffairs.gov.au/visas/working-in-australia/skillselect/invitation-rounds" target="_blank" rel="noopener">Home Affairs · SkillSelect 邀请轮次</a></li>
+    <li><a href="https://www.pearsonpte.com/articles/new-dha-visa-requirements-for-pte-academic/" target="_blank" rel="noopener">Pearson · PTE 新的 Home Affairs 分数对应</a></li>
+    <li><a href="https://www.engineersaustralia.org.au/migrants/migration-skills-assessment" target="_blank" rel="noopener">Engineers Australia · Migration Skills Assessment</a></li>
+    <li><a href="https://www.naati.com.au/migration-assessments/ccl/" target="_blank" rel="noopener">NAATI · CCL 考试</a></li>
+    <li><a href="https://www.visaadvisor.com.au/news-blog/blog/australia-points-test-reform-what-is-changing" target="_blank" rel="noopener">积分表改革进展汇总（Visa Advisor）</a></li>
+    <li><a href="https://www.jobsandskills.gov.au/data/occupation-and-industry-profiles/occupations/233112-materials-engineers" target="_blank" rel="noopener">Jobs and Skills Australia · 233112 Materials Engineers</a></li>
+  </ul>
+</footer>
+</div>
+
+<script>
+(function(){
+  const DEFAULT_RULES = {
+    age:[{min:18,max:24,pts:25},{min:25,max:32,pts:30},{min:33,max:39,pts:25},{min:40,max:44,pts:15}],
+    english:{competent:0,proficient:10,superior:20},
+    edu:{phd:20,master:15,diploma:10,none:0},
+    osExp:[{min:3,pts:5},{min:5,pts:10},{min:8,pts:15}],
+    auExp:[{min:1,pts:5},{min:3,pts:10},{min:5,pts:15},{min:8,pts:20}],
+    expCap:20,
+    naati:5, ausStudy:5, regional:5, specialist:10, py:5,
+    partner:{single:10,skilled:10,english:5,none:0},
+    nom190:5, nom491:15, minEoi:65,
+    engValid:3, naatiValid:5
+  };
+  const DEFAULT_STATE = {
+    date:'2031-08-01', dob:'2000-07-30', grad:'2028-06-30',
+    english:'superior', engDate:'2028-03-01', engRenew:true,
+    edu:'master', expStart:'2028-07-15', expGap:0, auExp:0,
+    partner:'single',
+    naati:true, naatiDate:'2028-09-01', ausStudy:false, regional:false, specialist:false, py:false,
+    adjust:0, t189:90, t190:85, t491:80, preset:'p4'
+  };
+  const PRESETS = [
+    {id:'p1', label:'毕业试水 2028-10', date:'2028-10-15', naati:false},
+    {id:'p2', label:'工作 1 年 2029-08', date:'2029-08-01', naati:false},
+    {id:'p3', label:'工作 3 年 2031-08', date:'2031-08-01', naati:false},
+    {id:'p4', label:'工作 3 年 + NAATI（建议）', date:'2031-08-01', naati:true},
+    {id:'p5', label:'最后窗口 2033-07-20', date:'2033-07-20', naati:true}
+  ];
+  const ENG_LABEL = {superior:'Superior',proficient:'Proficient',competent:'Competent'};
+  const EDU_LABEL = {phd:'博士',master:'硕士 / 学士',diploma:'大专 / 文凭',none:'未认定'};
+  const PARTNER_LABEL = {single:'单身或伴侣为公民 / PR',skilled:'伴侣技能达标',english:'伴侣英语达标',none:'伴侣不满足条件'};
+
+  function load(key, fallback){
+    try{ const v = localStorage.getItem(key); if(v) return Object.assign(JSON.parse(JSON.stringify(fallback)), JSON.parse(v)); }catch(e){}
+    return JSON.parse(JSON.stringify(fallback));
+  }
+  function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  let S = load('aupr.state.v1', DEFAULT_STATE);
+  let R = load('aupr.rules.v1', DEFAULT_RULES);
+
+  const $ = id => document.getElementById(id);
+  const parse = s => { if(!s) return null; const [y,m,d] = s.split('-').map(Number); return new Date(y, m-1, d); };
+  const fmt = d => d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+  const addYears = (d,n) => new Date(d.getFullYear()+n, d.getMonth(), d.getDate());
+  const DAY = 864e5, YEAR = 365.2425*DAY;
+  function ageAt(dob, d){ let a = d.getFullYear()-dob.getFullYear(); if(d.getMonth()<dob.getMonth() || (d.getMonth()===dob.getMonth() && d.getDate()<dob.getDate())) a--; return a; }
+  function tier(list, v){ let p = 0; list.slice().sort((a,b)=>a.min-b.min).forEach(t=>{ if(v >= t.min) p = t.pts; }); return p; }
+
+  function evaluate(dStr, st){
+    st = st || S;
+    const d = parse(dStr), dob = parse(st.dob), grad = parse(st.grad);
+    const items = [], warns = [];
+    const age = ageAt(dob, d);
+    let agePts = 0, ageNote = age+' 岁';
+    const band = R.age.find(b => age >= b.min && age <= b.max);
+    if(band) agePts = band.pts;
+    if(age >= 45) warns.push({crit:true, t:'<b>超龄：</b>45 岁及以上不能获邀。'});
+    items.push(['年龄', ageNote, agePts]);
+
+    let engPts = R.english[st.english] ?? 0, engNote = ENG_LABEL[st.english];
+    const eDate = parse(st.engDate);
+    if(eDate){
+      const exp = addYears(eDate, R.engValid);
+      if(d < eDate){ engPts = 0; engNote += '，成绩尚未取得'; }
+      else if(d >= exp && !st.engRenew){ engPts = 0; engNote += '，已过期'; warns.push({crit:true, t:'<b>英语已过期：</b>'+fmt(eDate)+' 的成绩在 '+fmt(exp)+' 失效，这一项按 0 分算。'}); }
+      else if(d >= exp && st.engRenew){ engNote += '，假设已重考'; }
+      else { engNote += '，'+fmt(exp)+' 前有效'; }
+    }
+    items.push(['英语', engNote, engPts]);
+
+    items.push(['学历', EDU_LABEL[st.edu], R.edu[st.edu] ?? 0]);
+
+    const es = parse(st.expStart);
+    let osYears = 0;
+    if(es && d > es){
+      const start = new Date(Math.max(es, addYears(d,-10)));
+      osYears = Math.max(0, (d - start)/YEAR - (Number(st.expGap)||0)/12);
+    }
+    const osPts = tier(R.osExp, osYears);
+    const auYears = Number(st.auExp)||0;
+    const auPts = tier(R.auExp, auYears);
+    const expPts = Math.min(R.expCap, osPts + auPts);
+    if(es && grad && es < grad) warns.push({crit:false, t:'<b>工作开始早于毕业：</b>EA 一般只认拿到学位之后的经验，毕业前的部分可能不算。'});
+    items.push(['海外工作', osYears.toFixed(1)+' 年', osPts]);
+    items.push(['澳洲工作', auYears.toFixed(1)+' 年', auPts]);
+    if(osPts + auPts > R.expCap) items.push(['工作经验上限', '合计封顶 '+R.expCap, expPts - osPts - auPts]);
+
+    items.push(['伴侣', PARTNER_LABEL[st.partner], R.partner[st.partner] ?? 0]);
+
+    let naatiPts = 0, naatiNote = '未考';
+    if(st.naati){
+      const nd = parse(st.naatiDate);
+      if(nd && d < nd){ naatiNote = '尚未取得'; }
+      else if(nd && d >= addYears(nd, R.naatiValid)){ naatiNote = '已过期'; warns.push({crit:false, t:'<b>NAATI 已过期：</b>CCL 成绩 '+R.naatiValid+' 年有效。'}); }
+      else { naatiPts = R.naati; naatiNote = nd ? fmt(addYears(nd,R.naatiValid))+' 前有效' : '已通过'; }
+    }
+    items.push(['NAATI CCL', naatiNote, naatiPts]);
+    if(st.ausStudy) items.push(['澳洲学习', '满 2 年', R.ausStudy]);
+    if(st.regional) items.push(['偏远地区学习', '', R.regional]);
+    if(st.specialist) items.push(['STEM 专业学历', '澳洲研究型硕博', R.specialist]);
+    if(st.py) items.push(['Professional Year', '', R.py]);
+    const adj = Number(st.adjust)||0;
+    if(adj) items.push(['其他调整', '手动', adj]);
+
+    const base = items.reduce((s,i)=>s+i[2],0);
+    if(base < R.minEoi) warns.push({crit:true, t:'<b>不够门槛：</b>189 低于 '+R.minEoi+' 分不能递 EOI。'});
+    return {base, s190:base+R.nom190, s491:base+R.nom491, items, warns, age, osYears};
+  }
+
+  // ---------- form binding ----------
+  const fields = ['date','dob','grad','english','engDate','engRenew','edu','expStart','expGap','auExp','partner','naati','naatiDate','ausStudy','regional','specialist','py','adjust','t189','t190','t491'];
+  function fillForm(){
+    fields.forEach(f=>{ const el = $(f); if(!el) return; if(el.type==='checkbox') el.checked = !!S[f]; else el.value = S[f]; });
+  }
+  function readForm(f){
+    const el = $(f);
+    S[f] = el.type==='checkbox' ? el.checked : (el.type==='number' ? (el.value===''?0:Number(el.value)) : el.value);
+  }
+  fields.forEach(f=>{
+    const el = $(f); if(!el) return;
+    el.addEventListener('input', ()=>{ readForm(f); if(f==='date'||f==='naati') S.preset=null; render(); });
+    el.addEventListener('change', ()=>{ readForm(f); render(); });
+  });
+  $('form').addEventListener('submit', e=>e.preventDefault());
+
+  const presetBox = $('presets');
+  PRESETS.forEach(p=>{
+    const b = document.createElement('button'); b.type='button'; b.textContent = p.label; b.dataset.id = p.id;
+    b.addEventListener('click', ()=>{ S.date = p.date; S.naati = p.naati; S.preset = p.id; fillForm(); render(); });
+    presetBox.appendChild(b);
+  });
+
+  function pill(score, target){
+    const diff = score - target;
+    if(diff >= 0) return '<span class="pill good">够线 +'+diff+'</span>';
+    if(diff >= -5) return '<span class="pill warn">差 '+(-diff)+' 分</span>';
+    return '<span class="pill crit">差 '+(-diff)+' 分</span>';
+  }
+
+  // ---------- rules editor ----------
+  function buildRules(){
+    const box = $('rules'); box.innerHTML = '';
+    const grp = (title, html) => { const g = document.createElement('div'); g.className='grp'; g.innerHTML = '<h4>'+title+'</h4>'+html; box.appendChild(g); };
+    const num = (path, v, w) => '<input type="number" data-path="'+path+'" value="'+v+'" aria-label="'+path+'"'+(w?' style="width:'+w+'"':'')+'>';
+    grp('年龄（起 · 止 · 说明 · 分）', R.age.map((a,i)=>'<div class="rline three">'+num('age.'+i+'.min',a.min)+num('age.'+i+'.max',a.max)+'<span class="muted">岁</span>'+num('age.'+i+'.pts',a.pts)+'</div>').join(''));
+    grp('英语', Object.keys(R.english).map(k=>'<div class="rline"><span>'+ENG_LABEL[k]+'</span>'+num('english.'+k,R.english[k])+'</div>').join(''));
+    grp('学历', Object.keys(R.edu).map(k=>'<div class="rline"><span>'+EDU_LABEL[k]+'</span>'+num('edu.'+k,R.edu[k])+'</div>').join(''));
+    grp('海外工作（满 N 年 · 分）', R.osExp.map((a,i)=>'<div class="rline"><span class="inline">'+num('osExp.'+i+'.min',a.min,'60px')+'<span class="muted">年起</span></span>'+num('osExp.'+i+'.pts',a.pts)+'</div>').join(''));
+    grp('澳洲工作（满 N 年 · 分）', R.auExp.map((a,i)=>'<div class="rline"><span class="inline">'+num('auExp.'+i+'.min',a.min,'60px')+'<span class="muted">年起</span></span>'+num('auExp.'+i+'.pts',a.pts)+'</div>').join('')+'<div class="rline"><span>经验合计上限</span>'+num('expCap',R.expCap)+'</div>');
+    grp('伴侣', Object.keys(R.partner).map(k=>'<div class="rline"><span>'+PARTNER_LABEL[k]+'</span>'+num('partner.'+k,R.partner[k])+'</div>').join(''));
+    grp('加分项', [['naati','NAATI CCL'],['ausStudy','澳洲学习'],['regional','偏远学习'],['specialist','STEM 专业学历'],['py','Professional Year']].map(([k,l])=>'<div class="rline"><span>'+l+'</span>'+num(k,R[k])+'</div>').join(''));
+    grp('担保与门槛', [['nom190','190 州担保'],['nom491','491 担保'],['minEoi','EOI 最低分'],['engValid','英语有效年数'],['naatiValid','NAATI 有效年数']].map(([k,l])=>'<div class="rline"><span>'+l+'</span>'+num(k,R[k])+'</div>').join(''));
+    box.querySelectorAll('input').forEach(inp=>inp.addEventListener('input', ()=>{
+      const parts = inp.dataset.path.split('.'); let o = R;
+      for(let i=0;i<parts.length-1;i++) o = o[parts[i]];
+      o[parts[parts.length-1]] = inp.value===''?0:Number(inp.value);
+      save('aupr.rules.v1', R); render(false);
+    }));
+  }
+  $('resetRules').addEventListener('click', ()=>{ R = JSON.parse(JSON.stringify(DEFAULT_RULES)); save('aupr.rules.v1', R); buildRules(); render(); });
+
+  // ---------- chart ----------
+  const svg = $('chart'), tip = $('tip'), box = $('chartBox');
+  const X0 = new Date(2028,6,1), X1 = new Date(2034,11,31);
+  let geom = null;
+  function drawChart(){
+    const W = Math.max(300, box.clientWidth), H = 260;
+    const m = {l:36, r:12, t:16, b:26};
+    svg.setAttribute('viewBox', '0 0 '+W+' '+H);
+    // sample every day
+    const pts = [];
+    for(let t = X0.getTime(); t <= X1.getTime(); t += DAY){ const d = new Date(t); pts.push([d, evaluate(fmt(d)).base]); }
+    const vals = pts.map(p=>p[1]).concat([S.t189]);
+    let lo = Math.floor((Math.min(...vals)-5)/5)*5, hi = Math.ceil((Math.max(...vals)+5)/5)*5;
+    if(hi - lo < 20) hi = lo + 20;
+    const x = d => m.l + (d - X0)/(X1 - X0)*(W - m.l - m.r);
+    const y = v => m.t + (hi - v)/(hi - lo)*(H - m.t - m.b);
+    geom = {x, y, m, W, H, pts, lo, hi};
+    let s = '';
+    // over-33 band
+    const b33 = addYears(parse(S.dob), 33);
+    if(b33 < X1){ const bx = Math.max(m.l, x(b33)); s += '<rect x="'+bx+'" y="'+m.t+'" width="'+(W-m.r-bx)+'" height="'+(H-m.t-m.b)+'" fill="var(--band)"/>';
+      s += '<text x="'+(W-m.r-4)+'" y="'+(H-m.b-6)+'" text-anchor="end" fill="var(--crit)" font-size="11">满 33 岁 '+fmt(b33)+'</text>'; }
+    // y grid
+    const step = (hi-lo) > 40 ? 10 : 5;
+    s += '<g class="axis">';
+    for(let v = lo; v <= hi; v += step){ s += '<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(v)+'" y2="'+y(v)+'" stroke="var(--line)" stroke-width="1"/><text x="'+(m.l-6)+'" y="'+(y(v)+4)+'" text-anchor="end">'+v+'</text>'; }
+    for(let yr = 2029; yr <= 2034; yr++){ const xx = x(new Date(yr,0,1)); s += '<line x1="'+xx+'" x2="'+xx+'" y1="'+(H-m.b)+'" y2="'+(H-m.b+4)+'" stroke="var(--muted)"/><text x="'+xx+'" y="'+(H-m.b+17)+'" text-anchor="middle">'+yr+'</text>'; }
+    s += '</g>';
+    // target line
+    s += '<line x1="'+m.l+'" x2="'+(W-m.r)+'" y1="'+y(S.t189)+'" y2="'+y(S.t189)+'" stroke="var(--ink-2)" stroke-width="1.5" stroke-dasharray="5 4"/>';
+    s += '<text x="'+(W-m.r-4)+'" y="'+(y(S.t189)-6)+'" text-anchor="end" fill="var(--ink-2)" font-size="11">189 目标 '+S.t189+'</text>';
+    // step path
+    let d = 'M'+x(pts[0][0]).toFixed(1)+' '+y(pts[0][1]).toFixed(1), prev = pts[0][1];
+    for(let i=1;i<pts.length;i++){ if(pts[i][1] !== prev){ const xx = x(pts[i][0]).toFixed(1); d += ' H'+xx+' V'+y(pts[i][1]).toFixed(1); prev = pts[i][1]; } }
+    d += ' H'+x(pts[pts.length-1][0]).toFixed(1);
+    s += '<path d="'+d+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>';
+    // selected date marker
+    const sd = parse(S.date);
+    if(sd >= X0 && sd <= X1){ const v = evaluate(S.date).base; s += '<line x1="'+x(sd)+'" x2="'+x(sd)+'" y1="'+m.t+'" y2="'+(H-m.b)+'" stroke="var(--steel)" stroke-width="1"/><circle cx="'+x(sd)+'" cy="'+y(v)+'" r="5" fill="var(--accent)" stroke="var(--surface)" stroke-width="2"/>'; }
+    s += '<g id="hover" style="display:none"><line id="hx" y1="'+m.t+'" y2="'+(H-m.b)+'" stroke="var(--muted)" stroke-dasharray="2 3"/><circle id="hc" r="4.5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/></g>';
+    s += '<rect x="'+m.l+'" y="'+m.t+'" width="'+(W-m.l-m.r)+'" height="'+(H-m.t-m.b)+'" fill="transparent" id="hit" style="cursor:crosshair"/>';
+    svg.innerHTML = s;
+    const hit = $('hit');
+    const at = ev => { const r = svg.getBoundingClientRect(); const px = (ev.clientX - r.left) * (W / r.width);
+      const t = X0.getTime() + (px - m.l)/(W - m.l - m.r)*(X1 - X0); return new Date(Math.min(X1, Math.max(X0, t))); };
+    hit.addEventListener('pointermove', ev=>{
+      const dd = at(ev); const e = evaluate(fmt(dd));
+      $('hover').style.display = ''; $('hx').setAttribute('x1', x(dd)); $('hx').setAttribute('x2', x(dd));
+      $('hc').setAttribute('cx', x(dd)); $('hc').setAttribute('cy', y(e.base));
+      tip.hidden = false;
+      tip.innerHTML = '<div class="mono">'+fmt(dd)+'</div>'+e.age+' 岁 · 海外经验 '+e.osYears.toFixed(1)+' 年<br>189 <b>'+e.base+'</b> · 190 <b>'+e.s190+'</b> · 491 <b>'+e.s491+'</b><div class="muted" style="font-size:11.5px">点击设为评估日期</div>';
+      const r = box.getBoundingClientRect(), sr = svg.getBoundingClientRect();
+      let left = (x(dd) * sr.width / W) + 12; if(left + 170 > r.width) left = left - 190;
+      tip.style.left = Math.max(0,left)+'px'; tip.style.top = '8px';
+    });
+    hit.addEventListener('pointerleave', ()=>{ $('hover').style.display='none'; tip.hidden = true; });
+    hit.addEventListener('click', ev=>{ S.date = fmt(at(ev)); S.preset = null; fillForm(); render(); });
+  }
+
+  function render(rebuild){
+    const e = evaluate(S.date);
+    $('s189').textContent = e.base; $('s190').textContent = e.s190; $('s491').textContent = e.s491;
+    $('p189').innerHTML = pill(e.base, S.t189); $('p190').innerHTML = pill(e.s190, S.t190); $('p491').innerHTML = pill(e.s491, S.t491);
+    $('total').textContent = e.base;
+    $('meta').innerHTML = '评估日 <b>'+S.date+'</b>　年龄 <b>'+e.age+'</b>　海外经验 <b>'+e.osYears.toFixed(1)+' 年</b>　EOI 门槛 <b>'+R.minEoi+'</b>';
+    $('breakdown').innerHTML = e.items.map(i=>'<tr class="'+(i[2]===0?'zero':'')+'"><td>'+i[0]+'</td><td class="muted">'+i[1]+'</td><td class="n">'+(i[2]>0?'+':'')+i[2]+'</td></tr>').join('');
+    $('warns').innerHTML = e.warns.map(w=>'<li class="'+(w.crit?'crit':'')+'">'+w.t+'</li>').join('');
+    $('naatiRow').hidden = !S.naati;
+    document.querySelectorAll('[data-rule]').forEach(el=>{ el.textContent = (el.closest('.check')?'+':'') + R[el.dataset.rule]; });
+    presetBox.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.id===S.preset)));
+    let rows = '';
+    for(let yr = 2028; yr <= 2034; yr++){ const ds = yr+'-08-01'; const r = evaluate(ds);
+      rows += '<tr><td class="mono">'+ds+'</td><td class="n">'+r.age+'</td><td class="n">'+r.osYears.toFixed(1)+'</td><td class="n">'+r.base+'</td><td class="n">'+r.s190+'</td><td class="n">'+r.s491+'</td></tr>'; }
+    $('yearBody').innerHTML = rows;
+    save('aupr.state.v1', S);
+    drawChart();
+  }
+
+  // ---------- todo ----------
+  const TODOS = [
+    ['t1','确定硕士课题里能写成 3 篇 Career Episode 的内容','2027-03'],
+    ['t2','学信网：大专、本科学历认证报告','2027-06'],
+    ['t3','雅思 7.5（外企求职用）','2027-06'],
+    ['t4','外企秋招，拿到材料工程岗 offer','2027-10'],
+    ['t5','跟进新积分表草案，更新计算器规则','2026-12'],
+    ['t6','PTE Superior：L69 R70 W85 S88','2028-05'],
+    ['t7','硕士学位 / 学历认证报告','2028-07'],
+    ['t8','向 Engineers Australia 递交 CDR','2028-08'],
+    ['t9','NAATI CCL 普通话','2028-09'],
+    ['t10','递 EOI（189 + 190），日历提醒 2 年到期','2028-11'],
+    ['t11','按月存工资单、个税、社保记录','每月'],
+    ['t12','每年 7 月查各州 190 / 491 名单','每年 7 月'],
+    ['t13','EA 工作经验评估（满 3 年）','2031-07'],
+    ['t14','英语到期前重考','2031-02']
+  ];
+  let done = load('aupr.todo.v1', {});
+  $('todoList').innerHTML = TODOS.map(([id,t,d])=>'<li><label><input type="checkbox" data-id="'+id+'"'+(done[id]?' checked':'')+'><span>'+t+'</span><span class="d">'+d+'</span></label></li>').join('');
+  $('todoList').querySelectorAll('input').forEach(i=>i.addEventListener('change', ()=>{ done[i.dataset.id] = i.checked; save('aupr.todo.v1', done); }));
+
+  fillForm(); buildRules(); render();
+  let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt = setTimeout(drawChart, 120); });
+})();
+</script>
