@@ -190,7 +190,7 @@ footer ul{margin:0;padding-left:18px}
 </header>
 
 <nav class="toc" aria-label="目录">
-  <a href="#verdict">结论</a><a href="#calc">EOI 计算器</a><a href="#timeline">时间线</a><a href="#visas">签证对比</a><a href="#ea">职业评估</a><a href="#work">工作经验</a><a href="#english">英语</a><a href="#risks">风险与备选</a><a href="#todo">清单</a>
+  <a href="#verdict">结论</a><a href="#calc">EOI 计算器</a><a href="#timeline">时间线</a><a href="#visas">签证对比</a><a href="#states">州要求</a><a href="#ea">职业评估</a><a href="#work">工作经验</a><a href="#english">英语</a><a href="#risks">风险与备选</a><a href="#todo">清单</a>
 </nav>
 
 <section id="verdict">
@@ -205,9 +205,9 @@ footer ul{margin:0;padding-left:18px}
       <p>2026–27 联邦预算已确认要改积分表，新表计划 2027 年 7 月 1 日起用，草案立法预计 2026 年 12 月。你 2028 年毕业后递 EOI，<b>大概率按新表算分</b>。下面的计算器用的是现行规则，积分值都能改，新表公布后直接改数就行。</p>
     </div>
     <div class="vcard">
-      <span class="eyebrow">按现行规则估算</span>
-      <span class="k">75 → 85</span>
-      <p>毕业时（28 岁、英语 Superior、硕士、单身）约 <b>75 分</b>；工作满 3 年 +5，再考 NAATI CCL +5，到 <b>85 分</b>。材料工程师 189 近年邀请线大约在 85–95 之间浮动，所以 85 只是刚够得着，190 / 491 更现实。</p>
+      <span class="eyebrow">按你的假设：189 线 85，491 裸分 75</span>
+      <span class="k">491 2029 · 189 2031</span>
+      <p>毕业时（28 岁、英语 Superior、硕士、单身）裸分约 <b>75</b>，分数上够 491。但州担保对海外申请人普遍要求<b>至少 1 年工作经验或当地 offer</b>，所以 491 现实起点是 2029 年工作满 1 年。189 要等 2031 年工作满 3 年，再加 NAATI，到 <b>85</b>。</p>
     </div>
     <div class="vcard">
       <span class="eyebrow">时间窗口</span>
@@ -301,7 +301,7 @@ footer ul{margin:0;padding-left:18px}
         <div class="score"><span class="eyebrow">190 州担保 +<span data-rule="nom190"></span></span><span class="v" id="s190">–</span>
           <span class="t"><label for="t190">目标线</label><input type="number" id="t190" step="5" min="65" max="130"></span><span id="p190"></span></div>
         <div class="score"><span class="eyebrow">491 偏远 +<span data-rule="nom491"></span></span><span class="v" id="s491">–</span>
-          <span class="t"><label for="t491">目标线</label><input type="number" id="t491" step="5" min="65" max="130"></span><span id="p491"></span></div>
+          <span class="t"><label for="t491">目标线</label><input type="number" id="t491" step="5" min="65" max="130"><span id="bare491"></span></span><span id="p491"></span></div>
       </div>
       <div class="meta" id="meta"></div>
       <ul class="warns" id="warns"></ul>
@@ -382,10 +382,11 @@ footer ul{margin:0;padding-left:18px}
         <li>EOI 同时勾选 189 和 190（可以选“任意州”），491 单独一份 EOI 更好管理。</li>
         <li>EOI 有效 2 年，年龄和“至今”的工作经验 SkillSelect 会自动更新分数，到期前重新递。</li>
       </ul></div></li>
-    <li><span class="when">2029 Q3</span><span class="rail"></span><div class="body">
-      <h3>工作满 1 年：看州担保</h3>
+    <li class="key"><span class="when">2029 Q3</span><span class="rail"></span><div class="body">
+      <h3>工作满 1 年：申 491（主方案）<span class="tag pts">+15</span></h3>
       <ul>
-        <li>部分州对海外申请人要求一定年限的本职工作经验。每年 7 月各州发布新名单，重点看 NSW、SA 这类历年对海外申请人相对开放的州。</li>
+        <li>WA、ACT 对海外申请人要求至少 1 年毕业后本职经验，这时刚好够格；SA 从 EOI 高分者里直接邀请。</li>
+        <li>7 月各州公布新年度名单后，逐个确认 233112 在不在海外申请人清单上，在的就单独递一份 491 EOI 或 ROI。</li>
       </ul></div></li>
     <li class="key"><span class="when">2031 Q3</span><span class="rail"></span><div class="body">
       <h3>工作满 3 年<span class="tag pts">+5</span></h3>
@@ -411,11 +412,58 @@ footer ul{margin:0;padding-left:18px}
       <thead><tr><th>签证</th><th>身份</th><th>加分</th><th>要求</th><th>对你来说</th></tr></thead>
       <tbody>
         <tr><td><b>189</b> 独立技术</td><td>直接永居</td><td class="num">0</td><td>无需担保，全国任选；拼分数</td><td>最理想，但材料工程师名额少，邀请线常在 85–95</td></tr>
-        <tr><td><b>190</b> 州担保</td><td>直接永居</td><td class="num">+5</td><td>职业在州名单上；获批后承诺在该州住 2 年</td><td>最现实的永居路线，但各州对海外申请人每年政策不同</td></tr>
-        <tr><td><b>491</b> 偏远地区</td><td>5 年临居，满 3 年且达到收入要求可转 191 永居</td><td class="num">+15</td><td>在偏远地区（悉尼、墨尔本、布里斯班以外）生活工作</td><td>分数压力最小；要接受去阿德莱德、珀斯、霍巴特或更偏的地方</td></tr>
+        <tr><td><b>190</b> 州担保</td><td>直接永居</td><td class="num">+5</td><td>职业在州名单上，满足州要求；获批后承诺在该州住 2 年</td><td>对海外申请人多数州很严，见下一节</td></tr>
+        <tr><td><b>491</b> 偏远地区</td><td>5 年临居，满 3 年且达到收入要求可转 191 永居</td><td class="num">+15</td><td>需要州担保，也要满足该州要求；5 年内在悉尼、墨尔本、布里斯班以外生活工作；转 191 要 3 个财年收入 ≥ AUD 53,900</td><td>分数压力最小，主方案；难点是州要求，不是偏远地区</td></tr>
         <tr><td><b>482 → 186</b> 雇主担保</td><td>先临居再永居</td><td class="num">–</td><td>澳洲雇主担保，不走积分</td><td>备选：外企若有澳洲业务，可争取内部调动</td></tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<section id="states">
+  <div class="sec-head">
+    <span class="eyebrow">州要求</span>
+    <h2>491 不只是去偏远地区，还要过州担保这一关</h2>
+    <p class="muted">491 有两种担保：州担保，或亲属担保（要有亲属住在偏远地区，你不适用）。所以你走的是州担保 491，和 190 一样要满足州的要求。区别是 491 的州要求通常比 190 松，名额也更偏向海外申请人。</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>491 本身的要求（联邦层面）</h3>
+      <ul>
+        <li>获邀时未满 45 岁</li>
+        <li>职业评估通过（你是 EA 的 233112）</li>
+        <li>英语至少 Competent</li>
+        <li>含 +15 担保分后总分 ≥ 65</li>
+        <li>职业在担保州当年的清单上</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>拿到签证以后</h3>
+      <ul>
+        <li>5 年临时签证，期间本人和家属必须在指定偏远地区生活、工作、学习</li>
+        <li>偏远地区包括珀斯、阿德莱德、霍巴特、堪培拉、黄金海岸、阳光海岸、纽卡斯尔、卧龙岗、吉朗，以及更偏的地方。只有悉尼、墨尔本、布里斯班不算。</li>
+        <li>持签满 3 年，且 3 个财年应税收入 ≥ AUD 53,900，可申请 191 永居</li>
+      </ul>
+    </div>
+  </div>
+  <div class="tbl card" style="padding:6px 8px">
+    <table>
+      <thead><tr><th>州</th><th>对海外申请人（2025–26 年度规则）</th><th>对你</th></tr></thead>
+      <tbody>
+        <tr><td><b>WA</b> 西澳</td><td>491 不需要 offer；近 10 年内至少 1 年本职经验；职业需在 WA 清单上</td><td><span class="pill good">工作满 1 年可申</span></td></tr>
+        <tr><td><b>ACT</b> 堪培拉</td><td>海外 491：职业在 Critical Skills List 上，近 5 年至少 1 年毕业后全职经验；按 Canberra Matrix 排名</td><td><span class="pill good">工作满 1 年可申</span></td></tr>
+        <tr><td><b>SA</b> 南澳</td><td>海外申请人不用递 ROI，州直接从 SkillSelect 里的高分 EOI 邀请；职业需在 SA 海外清单上</td><td><span class="pill good">可行，靠分数排名</span></td></tr>
+        <tr><td><b>TAS</b> 塔州</td><td>海外申请人基本要有塔州雇主的工作 offer</td><td><span class="pill warn">需 offer</span></td></tr>
+        <tr><td><b>NT</b> 北领地</td><td>海外只考虑 491，需 NT 本地雇主 offer，且近 5 年至少 2 年毕业后经验</td><td><span class="pill warn">需 offer</span></td></tr>
+        <tr><td><b>QLD</b> 昆州</td><td>海外名额少，职业范围窄，每年变化大</td><td><span class="pill warn">看当年</span></td></tr>
+        <tr><td><b>NSW</b> 新州</td><td>190 按 EOI 排名邀请，海外可申但分数要求高；491 面向海外的通道已关闭，现在要求已在 NSW 偏远地区居住工作</td><td><span class="pill crit">491 基本不行</span></td></tr>
+        <tr><td><b>VIC</b> 维州</td><td>海外申请人基本只限医疗等少数职业</td><td><span class="pill crit">基本不行</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p><b>对你的意思：</b>2028 年刚毕业时经验是 0，WA 和 ACT 都不够格，只有 SA 有机会。2029 年工作满 1 年后，WA、ACT、SA 都能申，这是 491 的主窗口。</p>
+    <p>裸分 75（加 15 后 90）在州排名里算中上，但各州不公布固定分数线，最终要看当年名额和竞争。上表是 2025–26 年度的规则，2026–27 年度各州还在陆续公布，申请那年要重新核对。</p>
   </div>
 </section>
 
@@ -559,6 +607,10 @@ footer ul{margin:0;padding-left:18px}
     <li><a href="https://www.engineersaustralia.org.au/migrants/migration-skills-assessment" target="_blank" rel="noopener">Engineers Australia · Migration Skills Assessment</a></li>
     <li><a href="https://www.naati.com.au/migration-assessments/ccl/" target="_blank" rel="noopener">NAATI · CCL 考试</a></li>
     <li><a href="https://www.visaadvisor.com.au/news-blog/blog/australia-points-test-reform-what-is-changing" target="_blank" rel="noopener">积分表改革进展汇总（Visa Advisor）</a></li>
+    <li><a href="https://migration.wa.gov.au/our-services-support/state-nominated-migration-program" target="_blank" rel="noopener">Migration WA · 州担保项目</a></li>
+    <li><a href="https://www.act.gov.au/migration/skilled-migrants/491-nomination-criteria/491-nomination-overseas-applicant-eligibility" target="_blank" rel="noopener">ACT · 491 海外申请人条件</a></li>
+    <li><a href="https://australiasnorthernterritory.com.au/move/migrate-to-work/nt-government-visa-nomination/eligibility" target="_blank" rel="noopener">NT · 担保条件</a></li>
+    <li><a href="https://www.nsw.gov.au/visas-and-migration/skilled-visas/skilled-work-regional-visa-subclass-491" target="_blank" rel="noopener">NSW · 491 通道关闭通知</a></li>
     <li><a href="https://www.jobsandskills.gov.au/data/occupation-and-industry-profiles/occupations/233112-materials-engineers" target="_blank" rel="noopener">Jobs and Skills Australia · 233112 Materials Engineers</a></li>
   </ul>
 </footer>
@@ -579,18 +631,18 @@ footer ul{margin:0;padding-left:18px}
     engValid:3, naatiValid:5
   };
   const DEFAULT_STATE = {
-    date:'2031-08-01', dob:'2000-07-30', grad:'2028-06-30',
+    date:'2029-08-01', dob:'2000-07-30', grad:'2028-06-30',
     english:'superior', engDate:'2028-03-01', engRenew:true,
     edu:'master', expStart:'2028-07-15', expGap:0, auExp:0,
     partner:'single',
-    naati:true, naatiDate:'2028-09-01', ausStudy:false, regional:false, specialist:false, py:false,
-    adjust:0, t189:90, t190:85, t491:80, preset:'p4'
+    naati:false, naatiDate:'2028-09-01', ausStudy:false, regional:false, specialist:false, py:false,
+    adjust:0, t189:85, t190:85, t491:90, preset:'p2'
   };
   const PRESETS = [
     {id:'p1', label:'毕业试水 2028-10', date:'2028-10-15', naati:false},
-    {id:'p2', label:'工作 1 年 2029-08', date:'2029-08-01', naati:false},
+    {id:'p2', label:'工作 1 年 · 491（主方案）', date:'2029-08-01', naati:false},
     {id:'p3', label:'工作 3 年 2031-08', date:'2031-08-01', naati:false},
-    {id:'p4', label:'工作 3 年 + NAATI（建议）', date:'2031-08-01', naati:true},
+    {id:'p4', label:'工作 3 年 + NAATI · 189', date:'2031-08-01', naati:true},
     {id:'p5', label:'最后窗口 2033-07-20', date:'2033-07-20', naati:true}
   ];
   const ENG_LABEL = {superior:'Superior',proficient:'Proficient',competent:'Competent'};
@@ -603,7 +655,7 @@ footer ul{margin:0;padding-left:18px}
   }
   function save(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
 
-  let S = load('aupr.state.v1', DEFAULT_STATE);
+  let S = load('aupr.state.v2', DEFAULT_STATE);
   let R = load('aupr.rules.v1', DEFAULT_RULES);
 
   const $ = id => document.getElementById(id);
@@ -790,6 +842,7 @@ footer ul{margin:0;padding-left:18px}
     const e = evaluate(S.date);
     $('s189').textContent = e.base; $('s190').textContent = e.s190; $('s491').textContent = e.s491;
     $('p189').innerHTML = pill(e.base, S.t189); $('p190').innerHTML = pill(e.s190, S.t190); $('p491').innerHTML = pill(e.s491, S.t491);
+    $('bare491').textContent = '裸分 '+(S.t491 - R.nom491);
     $('total').textContent = e.base;
     $('meta').innerHTML = '评估日 <b>'+S.date+'</b>　年龄 <b>'+e.age+'</b>　海外经验 <b>'+e.osYears.toFixed(1)+' 年</b>　EOI 门槛 <b>'+R.minEoi+'</b>';
     $('breakdown').innerHTML = e.items.map(i=>'<tr class="'+(i[2]===0?'zero':'')+'"><td>'+i[0]+'</td><td class="muted">'+i[1]+'</td><td class="n">'+(i[2]>0?'+':'')+i[2]+'</td></tr>').join('');
@@ -801,7 +854,7 @@ footer ul{margin:0;padding-left:18px}
     for(let yr = 2028; yr <= 2034; yr++){ const ds = yr+'-08-01'; const r = evaluate(ds);
       rows += '<tr><td class="mono">'+ds+'</td><td class="n">'+r.age+'</td><td class="n">'+r.osYears.toFixed(1)+'</td><td class="n">'+r.base+'</td><td class="n">'+r.s190+'</td><td class="n">'+r.s491+'</td></tr>'; }
     $('yearBody').innerHTML = rows;
-    save('aupr.state.v1', S);
+    save('aupr.state.v2', S);
     drawChart();
   }
 
