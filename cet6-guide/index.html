@@ -1,0 +1,474 @@
+<title>六级 425 突围计划</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=Noto+Serif+SC:wght@600;700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;1,8..60,400&display=swap">
+<style>
+:root{
+  --bg:#F2F5F4;
+  --paper:#FFFFFF;
+  --paper-2:#E6ECEA;
+  --ink:#16232A;
+  --ink-2:#34464F;
+  --muted:#5D6D72;
+  --line:#D2DBD9;
+  --teal:#0E6B69;
+  --teal-soft:#D8ECEA;
+  --mark:#C8412B;
+  --mark-soft:#F6DED8;
+  --good:#1F7349;
+  --good-soft:#D9EEE2;
+  --warn:#8F5E0C;
+  --warn-soft:#F5E7CC;
+  --display:"Noto Serif SC","Songti SC","STSong",serif;
+  --en:"Source Serif 4",Georgia,serif;
+  --body:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans SC",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0D1416;--paper:#152024;--paper-2:#1B292E;--ink:#E3ECEB;--ink-2:#C0CFCE;--muted:#8B9DA0;--line:#283A3F;
+    --teal:#5CC2BD;--teal-soft:#143331;--mark:#F08672;--mark-soft:#3A1E19;--good:#63C593;--good-soft:#15301F;--warn:#E3B45A;--warn-soft:#352712;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0D1416;--paper:#152024;--paper-2:#1B292E;--ink:#E3ECEB;--ink-2:#C0CFCE;--muted:#8B9DA0;--line:#283A3F;
+  --teal:#5CC2BD;--teal-soft:#143331;--mark:#F08672;--mark-soft:#3A1E19;--good:#63C593;--good-soft:#15301F;--warn:#E3B45A;--warn-soft:#352712;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.75;margin:0}
+.wrap{max-width:1000px;margin:0 auto;padding-inline:20px;padding-block:28px 64px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.3;text-wrap:balance}
+h1{font-size:clamp(30px,5vw,46px);font-weight:900}
+h2{font-size:24px}
+h3{font-size:17px;font-weight:600}
+p{margin:0}
+a{color:var(--teal)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.en{font-family:var(--en);font-size:16px}
+.muted{color:var(--muted)}
+.eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.hint{font-size:12.5px;color:var(--muted);line-height:1.55}
+
+header.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:end;padding-block:8px 28px;border-bottom:1px solid var(--line)}
+@media (max-width:760px){header.hero{grid-template-columns:minmax(0,1fr)}}
+.hero-copy{display:grid;gap:12px}
+.count{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px 18px;display:grid;gap:6px}
+.count .big{font-family:var(--mono);font-size:56px;font-weight:600;line-height:1;color:var(--teal)}
+.count .big small{font-size:18px;color:var(--muted);font-weight:500;margin-left:6px}
+.stripe{display:flex;height:12px;border-radius:3px;overflow:hidden;margin-top:6px}
+.stripe span{display:block;height:100%}
+
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-inline:-20px;padding:8px 20px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.toc a{flex:none;text-decoration:none;color:var(--ink-2);font-size:13px;padding:4px 10px;border-radius:999px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--paper-2);outline:none}
+
+section{padding-block:40px 6px;display:grid;gap:18px;scroll-margin-top:52px}
+.sec-head{display:grid;gap:6px;max-width:70ch}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr));gap:16px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:10px;align-content:start}
+.card.key{border-color:var(--teal)}
+.card ul,.card ol{margin:0;padding-left:20px;display:grid;gap:5px;color:var(--ink-2)}
+.tbl{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.05em}
+td.n,th.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.hot td{background:var(--mark-soft)}
+.pill{justify-self:start;display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:600;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.good{color:var(--good);background:var(--good-soft)}
+.pill.warn{color:var(--warn);background:var(--warn-soft)}
+.pill.bad{color:var(--mark);background:var(--mark-soft)}
+
+.tool{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:18px;display:grid;gap:16px}
+.parts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:16px}
+.part{display:grid;gap:8px;align-content:start}
+.part h3{font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.part h3 .num{color:var(--teal)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) 116px 64px;gap:8px;align-items:center;font-size:13.5px}
+.row .w{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right}
+input,select{font:inherit;font-size:14px;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:5px 8px;width:100%;min-width:0}
+input[type=number]{font-family:var(--mono)}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.total{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+@media (max-width:560px){.total{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.total div{background:var(--paper);padding:10px 12px;display:grid;gap:3px}
+.total .v{font-family:var(--mono);font-size:26px;font-weight:600;line-height:1.1}
+.total .main{background:var(--teal-soft)}
+.btn{font:inherit;font-size:13px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px;padding:5px 12px;cursor:pointer}
+.btn:hover{border-color:var(--teal)}
+
+.weeks{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.wk{display:grid;grid-template-columns:130px minmax(0,1fr);gap:14px;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:6px}
+@media (max-width:560px){.wk{grid-template-columns:1fr;gap:4px}}
+.wk.now{border-color:var(--teal);box-shadow:inset 3px 0 0 var(--teal)}
+.wk .when{display:grid;gap:2px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.wk .when b{font-family:var(--body);font-size:14px;color:var(--ink)}
+.wk .tasks{display:grid;gap:4px}
+.wk label{display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--ink-2);cursor:pointer}
+.wk input{width:auto;margin-top:6px;accent-color:var(--good)}
+.wk input:checked + span{color:var(--muted);text-decoration:line-through}
+.focus{font-size:12px;font-weight:600;color:var(--teal);margin-left:6px}
+
+.template{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:16px 18px;display:grid;gap:8px}
+.template p.en{line-height:1.7}
+.slot{background:var(--teal-soft);color:var(--teal);padding:0 4px;border-radius:2px;font-family:var(--body);font-size:13px}
+.vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:4px 16px}
+.vocab div{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line);font-size:14px}
+.vocab .en{font-size:14.5px;color:var(--ink-2);text-align:right}
+
+footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:8px;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="hero-copy">
+    <span class="eyebrow">CET-6 · 2026 年 12 月 12 日</span>
+    <h1>六级 425 突围计划</h1>
+    <p class="muted" style="max-width:54ch">上次听力 90、阅读 170。阅读已经够用，这次的分数要从听力里拿。计划按 11 周排，重点练听力的讲座部分（Section C），写作和翻译靠模板稳住。</p>
+  </div>
+  <div class="count" aria-live="polite">
+    <span class="eyebrow">距离考试</span>
+    <span class="big" id="days">–<small>天</small></span>
+    <span class="hint" id="weekNow"></span>
+    <div class="stripe" aria-label="总分构成：听力 35%，阅读 35%，写作 15%，翻译 15%">
+      <span style="width:35%;background:var(--mark)"></span><span style="width:35%;background:var(--teal)"></span><span style="width:15%;background:var(--ink-2)"></span><span style="width:15%;background:var(--muted)"></span>
+    </div>
+    <span class="hint">总分 710：听力 35% · 阅读 35% · 写作 15% · 翻译 15%，及格 425</span>
+  </div>
+</header>
+
+<nav class="toc" aria-label="目录">
+  <a href="#score">估分</a><a href="#plan">11 周计划</a><a href="#listening">听力</a><a href="#reading">阅读</a><a href="#writing">写作</a><a href="#translation">翻译</a><a href="#day">考试当天</a><a href="#ielts">和雅思的关系</a>
+</nav>
+
+<section id="score">
+  <div class="sec-head">
+    <span class="eyebrow">工具</span>
+    <h2>估分器：差的分从哪里来</h2>
+    <p class="muted">做完一套真题，按每部分答对的题数填。默认值是按你上次“听力 90、阅读 170”反推的示例，写作翻译先按中档估。六级实际成绩经过等值处理，这里只是按分值比例估算，误差十几分很正常。</p>
+  </div>
+  <form class="tool" id="scoreForm" autocomplete="off">
+    <div class="parts">
+      <div class="part">
+        <h3>听力 <span class="num" id="sumL">–</span></h3>
+        <div class="row"><label for="la">长对话 A（8 题）</label><input type="number" id="la" min="0" max="8"><span class="w">每题 7.1</span></div>
+        <div class="row"><label for="lb">短文 B（7 题）</label><input type="number" id="lb" min="0" max="7"><span class="w">每题 7.1</span></div>
+        <div class="row"><label for="lc">讲座 C（10 题）</label><input type="number" id="lc" min="0" max="10"><span class="w">每题 14.2</span></div>
+      </div>
+      <div class="part">
+        <h3>阅读 <span class="num" id="sumR">–</span></h3>
+        <div class="row"><label for="ra">选词填空（10 题）</label><input type="number" id="ra" min="0" max="10"><span class="w">每题 3.55</span></div>
+        <div class="row"><label for="rb">段落匹配（10 题）</label><input type="number" id="rb" min="0" max="10"><span class="w">每题 7.1</span></div>
+        <div class="row"><label for="rc">仔细阅读（10 题）</label><input type="number" id="rc" min="0" max="10"><span class="w">每题 14.2</span></div>
+      </div>
+      <div class="part">
+        <h3>写作和翻译 <span class="num" id="sumW">–</span></h3>
+        <div class="row"><label for="wr">写作档次</label><select id="wr"></select><span class="w">×7.1</span></div>
+        <div class="row"><label for="tr">翻译档次</label><select id="tr"></select><span class="w">×7.1</span></div>
+        <p class="hint">阅卷按 0–15 分分档，常见落在 8 分档（切题、有少量错误）或 11 分档（表达清楚、错误少）。</p>
+      </div>
+    </div>
+    <div class="total" id="totalOut"></div>
+    <div><button type="button" class="btn" id="resetScore">恢复示例</button></div>
+  </form>
+</section>
+
+<section id="plan">
+  <div class="sec-head">
+    <span class="eyebrow">11 周</span>
+    <h2>每周做什么</h2>
+    <p class="muted">每天约 1.5 小时：听力 1 小时，写作、翻译或阅读 30 分钟。本周会高亮，勾选状态保存在这台设备的浏览器里。</p>
+  </div>
+  <ol class="weeks" id="weeks"></ol>
+</section>
+
+<section id="listening">
+  <div class="sec-head">
+    <span class="eyebrow">听力 · 约 30 分钟 · 25 题 · 248.5 分</span>
+    <h2>听力：先把讲座部分练透</h2>
+  </div>
+  <div class="tbl card" style="padding:6px 8px">
+    <table>
+      <thead><tr><th>部分</th><th class="n">题数</th><th class="n">占总分</th><th class="n">每题约</th><th>对你</th></tr></thead>
+      <tbody>
+        <tr><td>长对话 Section A</td><td class="n">8</td><td class="n">8%</td><td class="n">7.1</td><td>保持，别丢简单题</td></tr>
+        <tr><td>短文 Section B</td><td class="n">7</td><td class="n">7%</td><td class="n">7.1</td><td>保持</td></tr>
+        <tr class="hot"><td><b>讲座和讲话 Section C</b></td><td class="n">10</td><td class="n">20%</td><td class="n">14.2</td><td><b>主攻：多对 4 题 ≈ 多 57 分</b></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="card key">
+      <h3>每天的精听流程（40 分钟）</h3>
+      <ol>
+        <li>用真题的一篇 Section C，正常做题，对答案。</li>
+        <li>逐句暂停听写，听不出来的地方空着，最多听 3 遍。</li>
+        <li>对照原文，标出没听出来的原因：生词、连读、语速、认识但反应不过来。</li>
+        <li>跟着录音影子跟读 3 遍，直到能同步说出来。</li>
+        <li>第二天开始前，把前一天那篇再盲听一遍。</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>做题技巧</h3>
+      <ul>
+        <li><b>先读选项：</b>利用播放说明的时间快速看选项，找出几个选项的共同话题，猜会问什么。</li>
+        <li><b>边听边标：</b>听到和选项一样或很接近的说法，马上在旁边做记号。六级的正确选项常常就是录音里原样出现的那句话。</li>
+        <li><b>注意转折：</b>but、however、actually 后面的内容常常就是答案。</li>
+        <li><b>讲座开头和结尾：</b>第一句通常点出话题，最后几句常出总结题。</li>
+        <li><b>不纠缠：</b>一题没听清就放掉，马上看下一题的选项。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>用什么练</h3>
+      <ul>
+        <li>近 5 年的六级真题（每年 6 月和 12 月各 3 套），只用真题，模拟题口音和难度都不准。</li>
+        <li>每天的精听材料从真题 Section C 里选，前面几年的用来精听，最近两年的留到最后三周做整套模考。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="reading">
+  <div class="sec-head">
+    <span class="eyebrow">阅读 · 40 分钟 · 30 题 · 248.5 分</span>
+    <h2>阅读：你的强项，保持住就行</h2>
+  </div>
+  <div class="grid2">
+    <div class="card key">
+      <h3>答题顺序</h3>
+      <ol>
+        <li><b>仔细阅读</b>（2 篇 10 题，占 20%，每题 14.2）：先做，约 20 分钟。</li>
+        <li><b>段落匹配</b>（10 题，占 10%）：约 13 分钟。先读句子抓关键词，再回原文找。</li>
+        <li><b>选词填空</b>（10 题，只占 5%）：最后做，剩几分钟就做几分钟。</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>保持手感</h3>
+      <ul>
+        <li>每周做一套阅读，计时 40 分钟。</li>
+        <li>错题找出原文依据句，写一句为什么错。</li>
+        <li>不用额外花时间，把省下的时间给听力。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="writing">
+  <div class="sec-head">
+    <span class="eyebrow">写作 · 30 分钟 · 150–200 词 · 106.5 分</span>
+    <h2>写作：一个结构写所有题</h2>
+    <p class="muted">六级作文常考议论文：对某个现象、观点或者一句名言谈看法。用下面这个三段结构，考前把框架背熟，考场只填内容。</p>
+  </div>
+  <div class="template">
+    <span class="eyebrow">三段式框架</span>
+    <p class="en"><b>第一段 · 引出话题：</b>In recent years, <span class="slot">现象或话题</span> has attracted growing attention. Some people believe that <span class="slot">观点 A</span>, while others argue that <span class="slot">观点 B</span>. In my view, <span class="slot">你的立场</span>.</p>
+    <p class="en"><b>第二段 · 两个理由：</b>The main reason is that <span class="slot">理由 1</span>. For example, <span class="slot">具体例子</span>. In addition, <span class="slot">理由 2</span>, which means <span class="slot">带来的结果</span>.</p>
+    <p class="en"><b>第三段 · 总结：</b>In conclusion, <span class="slot">重申立场</span>. Only when <span class="slot">条件</span> can we <span class="slot">目标</span>.</p>
+    <p class="hint">字数控制在 170–190 词；开头和结尾不用写长，把时间给第二段的例子。你的实验室、科研和读研经历都可以当例子。</p>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <h3>怎么从 8 分档到 11 分档</h3>
+      <ul>
+        <li>每段至少一个具体例子，不空谈。</li>
+        <li>检查三类错误：主谓一致、单复数、时态。</li>
+        <li>句式有变化：加一两个定语从句或 not only… but also。</li>
+        <li>书写清楚，不涂改一大片。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>练法</h3>
+      <ul>
+        <li>每周写 2 篇，限时 30 分钟。</li>
+        <li>写完对照真题范文，把好的句子抄进本子，改自己的错误。</li>
+        <li>最后三周每周 1 篇，保持节奏。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="translation">
+  <div class="sec-head">
+    <span class="eyebrow">翻译 · 30 分钟 · 汉译英 180–200 字 · 106.5 分</span>
+    <h2>翻译：拆句、找主干、词汇提前备</h2>
+  </div>
+  <div class="grid2">
+    <div class="card key">
+      <h3>三步法</h3>
+      <ol>
+        <li><b>拆句：</b>中文一逗到底，先按意思拆成 2–3 个英文句子。</li>
+        <li><b>找主干：</b>每句先定主语和谓语，其他成分用 which、with、to do 挂上去。</li>
+        <li><b>不会的词换说法：</b>“琳琅满目”写成 a wide variety of，意思对就能拿分，别空着。</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h3>常见话题</h3>
+      <p class="muted">中国传统文化、历史名城、社会发展、科技成就、生态环境。每周练 2 段真题翻译，对照参考译文整理词汇。</p>
+    </div>
+  </div>
+  <div class="card">
+    <h3>高频词汇</h3>
+    <div class="vocab">
+      <div><span>春节</span><span class="en">the Spring Festival</span></div>
+      <div><span>丝绸之路</span><span class="en">the Silk Road</span></div>
+      <div><span>书法</span><span class="en">calligraphy</span></div>
+      <div><span>儒家思想</span><span class="en">Confucianism</span></div>
+      <div><span>高铁</span><span class="en">high-speed rail</span></div>
+      <div><span>移动支付</span><span class="en">mobile payment</span></div>
+      <div><span>城镇化</span><span class="en">urbanization</span></div>
+      <div><span>乡村振兴</span><span class="en">rural revitalization</span></div>
+      <div><span>可持续发展</span><span class="en">sustainable development</span></div>
+      <div><span>生态环境</span><span class="en">the ecological environment</span></div>
+      <div><span>脱贫</span><span class="en">poverty alleviation</span></div>
+      <div><span>人工智能</span><span class="en">artificial intelligence</span></div>
+      <div><span>新能源汽车</span><span class="en">new energy vehicles</span></div>
+      <div><span>非物质文化遗产</span><span class="en">intangible cultural heritage</span></div>
+      <div><span>历史悠久</span><span class="en">have a long history</span></div>
+      <div><span>深受……欢迎</span><span class="en">be popular with</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="day">
+  <div class="sec-head">
+    <span class="eyebrow">12 月 12 日下午</span>
+    <h2>考试当天</h2>
+  </div>
+  <div class="grid2">
+    <div class="card key">
+      <h3>顺序和时间</h3>
+      <ol>
+        <li>写作 30 分钟（先考，考完收作文答题卡）</li>
+        <li>听力约 30 分钟</li>
+        <li>阅读 40 分钟</li>
+        <li>翻译 30 分钟</li>
+      </ol>
+      <p class="hint">具体入场和开考时间以准考证为准。</p>
+    </div>
+    <div class="card">
+      <h3>带齐</h3>
+      <ul>
+        <li>准考证、身份证、学生证</li>
+        <li>2B 铅笔、橡皮、黑色签字笔</li>
+        <li>能看时间的普通手表（不能带智能手表）</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>听力前的几分钟</h3>
+      <ul>
+        <li>写作一结束立刻翻到听力，利用放说明的时间先看 Section A 的选项。</li>
+        <li>听力答案边听边涂，别留到最后。</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="ielts">
+  <div class="sec-head">
+    <span class="eyebrow">一举两得</span>
+    <h2>这 11 周对雅思的帮助</h2>
+  </div>
+  <div class="tbl card" style="padding:6px 8px">
+    <table>
+      <thead><tr><th>六级在练的</th><th>对雅思的用处</th></tr></thead>
+      <tbody>
+        <tr><td>讲座精听、影子跟读</td><td>雅思听力 Section 4 也是一段学术独白，方法完全一样</td></tr>
+        <tr><td>段落匹配</td><td>和雅思阅读的段落信息配对是同一类题</td></tr>
+        <tr><td>作文的例子和语法检查</td><td>雅思写作“展开观点”和“语法准确”两项的基础</td></tr>
+        <tr><td>六级词汇</td><td>基本覆盖雅思 7 分需要的词汇</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted" style="max-width:70ch">12 月 12 日考完休息几天，然后直接进入雅思手册里的“诊断”阶段。</p>
+</section>
+
+<footer>
+  <p>分值比例按六级官方公布的各部分占比计算，实际成绩经过等值处理，估分仅供参考。考试安排以准考证和全国大学英语四六级考试官网为准。</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  const $ = id => document.getElementById(id);
+  const store = {
+    get(k,d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+    set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+  };
+  const EXAM = new Date(2026, 11, 12);
+  const START = new Date(2026, 8, 28); // Monday
+  const today = new Date(); today.setHours(0,0,0,0);
+  const days = Math.max(0, Math.round((EXAM - today)/864e5));
+  $('days').innerHTML = days + '<small>天</small>';
+  const curWeek = Math.floor((today - START)/ (7*864e5)) + 1;
+
+  // ---------- score ----------
+  const U = 7.1; // 710 / 100
+  const W = {la:U, lb:U, lc:2*U, ra:U/2, rb:U, rc:2*U};
+  const MAX = {la:8, lb:7, lc:10, ra:10, rb:10, rc:10};
+  const EXAMPLE = {la:4, lb:3, lc:3, ra:6, rb:7, rc:7, wr:8, tr:8};
+  const BANDS = [14,11,8,5,2,0];
+  const bandLabel = {14:'14 档（优秀）',11:'11 档（良好）',8:'8 档（中等）',5:'5 档（较差）',2:'2 档',0:'0（空白）'};
+  ['wr','tr'].forEach(id=>{ $(id).innerHTML = BANDS.map(b=>'<option value="'+b+'">'+bandLabel[b]+'</option>').join(''); });
+  let S = Object.assign({}, EXAMPLE, store.get('cet6.score', {}));
+  function fill(){ Object.keys(EXAMPLE).forEach(k=>{ $(k).value = S[k]; }); }
+  function pill(v, need){ if(v >= need) return '<span class="pill good">够 '+need+'</span>'; if(v >= need-15) return '<span class="pill warn">差 '+Math.ceil(need-v)+'</span>'; return '<span class="pill bad">差 '+Math.ceil(need-v)+'</span>'; }
+  function calc(){
+    Object.keys(EXAMPLE).forEach(k=>{ let v = +$(k).value || 0; if(MAX[k]!==undefined) v = Math.max(0, Math.min(MAX[k], v)); S[k] = v; });
+    store.set('cet6.score', S);
+    const L = S.la*W.la + S.lb*W.lb + S.lc*W.lc;
+    const R = S.ra*W.ra + S.rb*W.rb + S.rc*W.rc;
+    const WT = (S.wr + S.tr) * U;
+    const T = L + R + WT;
+    $('sumL').textContent = L.toFixed(0) + ' / 248.5';
+    $('sumR').textContent = R.toFixed(0) + ' / 248.5';
+    $('sumW').textContent = WT.toFixed(0) + ' / 213';
+    const gap = 425 - T;
+    let advice;
+    if(gap <= 0) advice = '已经过线，稳住听力，写作翻译别失误。';
+    else {
+      const c = Math.ceil(gap / (2*U));
+      advice = '还差 '+Math.ceil(gap)+' 分，约等于讲座部分多对 <b class="num">'+c+'</b> 题'+(S.lc + c > 10 ? '（讲座不够，要加上长对话、短文或写作翻译）' : '')+'。';
+    }
+    $('totalOut').innerHTML =
+      '<div><span class="eyebrow">听力</span><span class="v">'+L.toFixed(0)+'</span>'+pill(L,149)+'</div>'+
+      '<div><span class="eyebrow">阅读</span><span class="v">'+R.toFixed(0)+'</span>'+pill(R,149)+'</div>'+
+      '<div><span class="eyebrow">写作+翻译</span><span class="v">'+WT.toFixed(0)+'</span>'+pill(WT,128)+'</div>'+
+      '<div class="main"><span class="eyebrow">总分</span><span class="v">'+T.toFixed(0)+'</span>'+(T>=425?'<span class="pill good">过线</span>':'<span class="pill bad">差 '+Math.ceil(gap)+'</span>')+'</div>'+
+      '<div style="grid-column:1/-1"><span class="hint">'+advice+' 单项的“够”按及格线 60% 的比例估算，只是参考。</span></div>';
+  }
+  Object.keys(EXAMPLE).forEach(k=>{ $(k).addEventListener('input', calc); $(k).addEventListener('change', calc); });
+  $('scoreForm').addEventListener('submit', e=>e.preventDefault());
+  $('resetScore').addEventListener('click', ()=>{ S = Object.assign({}, EXAMPLE); fill(); calc(); });
+  fill(); calc();
+
+  // ---------- weeks ----------
+  const PLAN = [
+    ['诊断', '听力', ['做一整套近年真题，严格计时，用估分器算分', '找出听力哪部分错最多', '买好或下载近 5 年真题和音频']],
+    ['打基础', '讲座精听', ['每天精听 1 篇 Section C（40 分钟）', '背六级核心词汇，每天 30 个', '写作文 1 篇，套三段式框架']],
+    ['打基础', '讲座精听', ['每天精听 1 篇 Section C', '翻译练 2 段，整理词汇', '写作文 1 篇']],
+    ['加量', '讲座 + 短文', ['精听继续，另加 2 篇 Section B', '阅读做 1 套保持手感', '写作文 2 篇']],
+    ['加量', '讲座 + 短文', ['精听继续，把第 1 周的材料盲听一遍', '翻译练 2 段', '写作文 2 篇']],
+    ['专项', '听力整套', ['每两天做一整套听力（25 题），错题精听', '阅读 1 套', '作文 1 篇 + 翻译 2 段']],
+    ['专项', '听力整套', ['听力整套 3 次，算听力分', '检查听力分是否到 130 以上', '作文 1 篇 + 翻译 2 段']],
+    ['专项', '长对话补漏', ['听力整套 3 次', '长对话错题精听', '作文、翻译各 1 篇']],
+    ['模考', '全真模拟', ['用最近两年的真题做整套模考 1 次，按考试顺序', '估分，看离 425 还差多少', '错题回顾']],
+    ['模考', '全真模拟', ['整套模考 1 次', '作文框架、翻译词汇过一遍', '听力每天保持 30 分钟']],
+    ['考前', '减量', ['每天 30 分钟听力保持耳感', '背一遍作文框架', '准备准考证、证件、2B 铅笔、手表，早睡']]
+  ];
+  let done = store.get('cet6.weeks', {});
+  const d2 = d => (d.getMonth()+1)+'/'+d.getDate();
+  $('weeks').innerHTML = PLAN.map(([name, focus, tasks], i)=>{
+    const s = new Date(START.getFullYear(), START.getMonth(), START.getDate() + i*7);
+    const e = i === PLAN.length-1 ? EXAM : new Date(s.getFullYear(), s.getMonth(), s.getDate()+6);
+    return '<li class="wk'+(i+1===curWeek?' now':'')+'"><span class="when"><b>第 '+(i+1)+' 周 · '+name+'</b>'+d2(s)+' – '+d2(e)+'<span class="focus">'+focus+'</span></span><div class="tasks">'+
+      tasks.map((t,j)=>{ const id='k'+i+'_'+j; return '<label><input type="checkbox" id="'+id+'"'+(done[id]?' checked':'')+'><span>'+t+'</span></label>'; }).join('')+'</div></li>';
+  }).join('');
+  $('weeks').querySelectorAll('input').forEach(c=>c.addEventListener('change', ()=>{ done[c.id] = c.checked; store.set('cet6.weeks', done); }));
+  $('weekNow').textContent = curWeek >= 1 && curWeek <= PLAN.length ? '现在是计划第 '+curWeek+' 周：'+PLAN[curWeek-1][0] : (curWeek < 1 ? '计划从 9 月 28 日（周一）开始' : '');
+})();
+</script>
