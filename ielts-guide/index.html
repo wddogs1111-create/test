@@ -155,6 +155,28 @@ s.err{text-decoration-color:var(--red);text-decoration-thickness:2px;color:var(-
 .counts{display:flex;flex-wrap:wrap;gap:6px}
 .chip{font-size:12.5px;border:1px solid var(--line);border-radius:999px;padding:1px 9px;background:var(--paper);color:var(--ink-2)}
 
+/* grammar */
+.gram{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:g}
+.gram li{counter-increment:g;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px 12px 50px;position:relative;display:grid;gap:6px}
+.gram li::before{content:counter(g);position:absolute;left:14px;top:12px;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--red);width:24px;height:24px;border:1px solid var(--red);border-radius:50%;display:grid;place-items:center}
+.gram .stage{font-size:11.5px;font-weight:600;letter-spacing:.06em;color:var(--muted);margin-left:8px}
+.gram .pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+@media (max-width:640px){.gram .pair{grid-template-columns:1fr}}
+.gram .pair p{font-family:var(--en);font-size:15px}
+.gram .pair .lab{font-family:var(--body);font-size:11.5px;font-weight:600;letter-spacing:.06em;display:block}
+.gram .bad-l{color:var(--muted)}
+.gram .good-l{color:var(--red)}
+.quiz{display:grid;gap:12px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:8px}
+.q .stem{font-family:var(--en);font-size:16px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{font:inherit;font-family:var(--en);font-size:15px;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:4px;padding:4px 12px;cursor:pointer}
+.opts button:hover{border-color:var(--ink-2)}
+.opts button.right{border-color:var(--good);background:var(--good-soft);color:var(--good)}
+.opts button.wrong{border-color:var(--red);background:var(--red-soft);color:var(--red)}
+.q .exp{font-size:13px;color:var(--ink-2)}
+.qscore{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
 footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);display:grid;gap:10px;font-size:13px;color:var(--muted)}
 footer ul{margin:0;padding-left:18px}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
@@ -181,7 +203,7 @@ footer ul{margin:0;padding-left:18px}
 </header>
 
 <nav class="toc" aria-label="目录">
-  <a href="#rules">规则</a><a href="#calc">分数换算</a><a href="#plan">备考计划</a><a href="#listening">听力</a><a href="#reading">阅读</a><a href="#writing">写作</a><a href="#speaking">口语</a><a href="#week">每周安排</a><a href="#log">错题本</a><a href="#res">资料</a>
+  <a href="#rules">规则</a><a href="#calc">分数换算</a><a href="#plan">备考计划</a><a href="#grammar">语法</a><a href="#listening">听力</a><a href="#reading">阅读</a><a href="#writing">写作</a><a href="#speaking">口语</a><a href="#week">每周安排</a><a href="#log">错题本</a><a href="#res">资料</a>
 </nav>
 
 <section id="rules">
@@ -260,6 +282,37 @@ footer ul{margin:0;padding-left:18px}
     <div class="alloc" id="pAlloc" aria-label="每周时间分配"></div>
   </form>
   <ol class="phases" id="pPhases"></ol>
+</section>
+
+<section id="grammar">
+  <div class="sec-head">
+    <span class="eyebrow">基础 · 写作和口语的地基</span>
+    <h2>语法：只补雅思用得上的 14 个点</h2>
+    <p class="muted">写作和口语的“语法”一项，8 分要求大多数句子没有错误。不用学完整本语法书，按下面的顺序补：前 6 个是基础，错一个就压分；中间 6 个让句式变丰富；最后 2 个是 8 分作文常见的写法。</p>
+  </div>
+  <div class="grid2">
+    <div class="card key">
+      <h3>学的方法</h3>
+      <ul>
+        <li>主教材：Raymond Murphy《English Grammar in Use》（剑桥中级语法，红皮），只做和下面 14 个点对应的单元。</li>
+        <li>每天 1 个单元：读规则 10 分钟，做练习 15 分钟，再用这个语法点写 3 个关于自己的句子。</li>
+        <li>学得快的话，6–8 周能把重点过完，然后直接在写作里用，错了记进错题本。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>检验标准</h3>
+      <ul>
+        <li>写完一篇 Task 2，自己能找出一半以上的语法错误。</li>
+        <li>下面的自测题做到全对。</li>
+        <li>老师批改时，语法错误从每段好几处降到每篇两三处。</li>
+      </ul>
+    </div>
+  </div>
+  <ol class="gram"><li><h3>句子骨架：一个句子只有一个主干<span class="stage">基础</span></h3><p class="muted">每个完整句子要有主语和谓语动词。两个完整句子不能只用逗号连起来，要用句号、连词或分号。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Many people move to cities, they want better jobs.</p><p><span class="lab good-l">正确写法</span>Many people move to cities <b>because</b> they want better jobs.</p></div></li><li><h3>三个核心时态<span class="stage">基础</span></h3><p class="muted">写作口语 90% 靠一般现在时、一般过去时、现在完成时。讲经历用过去时，讲“到现在为止”的变化用现在完成时。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>I study materials since 2025.</p><p><span class="lab good-l">正确写法</span>I <b>have studied</b> materials since 2025.</p></div></li><li><h3>主谓一致<span class="stage">基础</span></h3><p class="muted">主语是单数，动词加 s；主语很长时，先找到真正的主语中心词。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>The number of students who study abroad have increased.</p><p><span class="lab good-l">正确写法</span>The number of students who study abroad <b>has</b> increased.</p></div></li><li><h3>可数与不可数名词<span class="stage">基础</span></h3><p class="muted">information、advice、research、equipment、knowledge、evidence 不可数，不加 s，不用 many。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>We need more researches and many equipments.</p><p><span class="lab good-l">正确写法</span>We need more <b>research</b> and <b>much equipment</b>.</p></div></li><li><h3>冠词 a / the / 不用冠词<span class="stage">基础</span></h3><p class="muted">第一次提到的单数可数名词用 a，双方都知道的用 the；泛指复数和不可数名词通常不用冠词。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Internet has changed the education.</p><p><span class="lab good-l">正确写法</span><b>The internet</b> has changed education.</p></div></li><li><h3>介词搭配<span class="stage">基础</span></h3><p class="muted">介词要跟着词一起记，不能按中文意思直译。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>This has a big influence to young people.</p><p><span class="lab good-l">正确写法</span>This has a big influence <b>on</b> young people.</p></div></li><li><h3>连接词和让步<span class="stage">进阶</span></h3><p class="muted">although / while / whereas 连接对比，however 是副词，前面要用句号或分号。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Cars are convenient, however they cause pollution.</p><p><span class="lab good-l">正确写法</span>Cars are convenient<b>; however,</b> they cause pollution.</p></div></li><li><h3>定语从句<span class="stage">进阶</span></h3><p class="muted">which / that 修饰物，who 修饰人；加逗号的非限定从句只能用 which，不能用 that。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Solar power, that is renewable, is becoming cheaper.</p><p><span class="lab good-l">正确写法</span>Solar power, <b>which</b> is renewable, is becoming cheaper.</p></div></li><li><h3>名词性从句<span class="stage">进阶</span></h3><p class="muted">用 that / whether / what 引导的从句作主语或宾语，让观点句更紧凑。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Some people think it is good or not is unclear.</p><p><span class="lab good-l">正确写法</span><b>Whether</b> it is beneficial remains unclear.</p></div></li><li><h3>非谓语：to do / doing / done<span class="stage">进阶</span></h3><p class="muted">一个句子只能有一个谓语，其他动作用 to do、doing 或 done 来表达。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Use public transport can reduce traffic.</p><p><span class="lab good-l">正确写法</span><b>Using</b> public transport can reduce traffic.</p></div></li><li><h3>被动语态<span class="stage">进阶</span></h3><p class="muted">Task 1 流程图和客观描述常用被动，强调动作而不是做事的人。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>The raw materials heat to 1,200 °C.</p><p><span class="lab good-l">正确写法</span>The raw materials <b>are heated</b> to 1,200 °C.</p></div></li><li><h3>比较结构<span class="stage">进阶</span></h3><p class="muted">Task 1 数据题必备：比较级、最高级、倍数、as…as。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Sales in 2020 were more higher than 2010.</p><p><span class="lab good-l">正确写法</span>Sales in 2020 were <b>twice as high as</b> those in 2010.</p></div></li><li><h3>情态动词表达分寸<span class="stage">8 分</span></h3><p class="muted">may / might / could / tend to 让观点不绝对，这是 8 分写作的常见特征。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>Technology will make all people lonely.</p><p><span class="lab good-l">正确写法</span>Technology <b>may</b> make some people <b>more</b> isolated.</p></div></li><li><h3>条件句<span class="stage">8 分</span></h3><p class="muted">if + 现在时 → will（真实可能）；if + 过去时 → would（假设）。口语 Part 3 讨论假设时常用。</p><div class="pair"><p><span class="lab bad-l">常见错误</span>If governments invest more, pollution would decrease.</p><p><span class="lab good-l">正确写法</span>If governments <b>invested</b> more, pollution <b>would</b> decrease.</p></div></li></ol>
+
+  <h3>自测：选出正确的填空</h3>
+  <div class="qscore"><span id="qScore" class="muted small"></span><button type="button" class="btn ghost" id="qReset">重做</button></div>
+  <div class="quiz" id="quiz"></div>
 </section>
 
 <section id="listening">
@@ -587,7 +640,8 @@ footer ul{margin:0;padding-left:18px}
       const p3 = addDays(today, Math.round(days*.85));
       const weakest = score.slice().sort((a,b)=>b.w-a.w)[0].n;
       ph.push(['诊断', dstr(today)+' → '+dstr(p1), ['做一套完整剑桥真题，限时、不查词典', '录一段 Part 2 口语、写一篇 Task 2，找老师或对照评分标准打分', '把四项真实分数填回上面，重新生成计划']]);
-      ph.push(['打基础', dstr(p1)+' → '+dstr(p2), ['听力每天精听听写 20–30 分钟', '阅读每周 3 篇限时，错题逐句找原文', '写作每周 2 篇并重写', '口语每天录音 1 题，重点改发音和卡壳', '优先投入最弱的一项：'+weakest]]);
+      const low = Math.min(st.L,st.R,st.W,st.S) <= 6;
+      ph.push(['打基础', dstr(p1)+' → '+dstr(p2), [...(low?['语法：每天 1 个单元，6–8 周过完下面 14 个重点','单词：按话题背，每天 20–30 个，重在会用']:[]), '听力每天精听听写 20–30 分钟', '阅读每周 3 篇限时，错题逐句找原文', '写作每周 2 篇并重写', '口语每天录音 1 题，重点改发音和卡壳', '优先投入最弱的一项：'+weakest]]);
       ph.push(['强化', dstr(p2)+' → '+dstr(p3), ['每周 1 套完整模考，记录分数', '写作找有经验的老师批改', '口语准备当季题库，Part 2 故事串联使用', '错题本每周回顾']]);
       ph.push(['冲刺', dstr(p3)+' → '+dstr(exam), ['每周 2 套模考，按考试时间作息', '只复习错题本，不再开新资料', '考前一周减量，保证睡眠']]);
     }
@@ -636,5 +690,36 @@ footer ul{margin:0;padding-left:18px}
     store.set('ielts.log', log); $('lNote').value=''; renderLog();
   });
   renderLog();
+  // ---------- grammar quiz ----------
+  const QUIZ = [
+    ['She ___ in Hefei since 2024.', ['lives','has lived','is living'], 1, '“自从……到现在”用现在完成时。'],
+    ['We need more ___ before we decide.', ['informations','information','an information'], 1, 'information 不可数。'],
+    ['___ internet has changed how we work.', ['The','An','（不填）'], 0, 'the internet 是固定用法。'],
+    ['The number of cars ___ risen sharply.', ['have','has','are'], 1, '主语中心词是 the number，单数。'],
+    ['Cars are useful; ___, they cause pollution.', ['however','although','but'], 0, '分号后面接 however，再加逗号。'],
+    ['Graphene, ___ is very strong, is expensive to produce.', ['that','which','what'], 1, '有逗号的非限定从句只能用 which。'],
+    ['___ public transport reduces traffic.', ['Use','Using','Used'], 1, '动作作主语用 doing。'],
+    ['The samples ___ at 800 °C for two hours.', ['heated','were heated','were heating'], 1, '样品是被加热的，用被动。'],
+    ['This policy has a positive effect ___ students.', ['to','on','for'], 1, 'effect on 是固定搭配。'],
+    ['If I ___ in Australia, I would work as an engineer.', ['live','lived','will live'], 1, '假设情况：if + 过去时，主句用 would。'],
+    ['Sales in 2020 were ___ those in 2010.', ['more higher than','twice as high as','twice higher'], 1, '倍数用 twice as … as。'],
+    ['Many people move to cities ___ they want better jobs.', [', ','because','so'], 1, '两个完整句子要用连词连接，不能只用逗号。']
+  ];
+  let qAns = store.get('ielts.quiz', {});
+  function renderQuiz(){
+    let right = 0, done = 0;
+    $('quiz').innerHTML = QUIZ.map(([stem,opts,ok,exp],i)=>{
+      const a = qAns[i];
+      if(a !== undefined){ done++; if(a===ok) right++; }
+      return '<div class="q"><span class="stem">'+(i+1)+'. '+stem+'</span><div class="opts">'+opts.map((o,j)=>{
+        let c = ''; if(a !== undefined){ if(j===ok) c='right'; else if(j===a) c='wrong'; }
+        return '<button type="button" class="'+c+'" data-q="'+i+'" data-o="'+j+'"'+(a!==undefined?' disabled':'')+'>'+o+'</button>';
+      }).join('')+'</div>'+(a!==undefined?'<span class="exp">'+(a===ok?'正确。':'正确答案：'+opts[ok]+'。')+exp+'</span>':'')+'</div>';
+    }).join('');
+    $('qScore').textContent = done ? '已做 '+done+' / '+QUIZ.length+'，答对 '+right+' 题' : '共 '+QUIZ.length+' 题，点选项作答';
+    $('quiz').querySelectorAll('button[data-q]').forEach(b=>b.addEventListener('click', ()=>{ qAns[b.dataset.q] = +b.dataset.o; store.set('ielts.quiz', qAns); renderQuiz(); }));
+  }
+  $('qReset').addEventListener('click', ()=>{ qAns = {}; store.set('ielts.quiz', qAns); renderQuiz(); });
+  renderQuiz();
 })();
 </script>
